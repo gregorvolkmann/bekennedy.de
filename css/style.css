@@ -1,7 +1,7 @@
 /******		General		******/
 
-@font-face { font-family: 'AkzidenzGroteskLight'; src: url( ../fnt/AkzidenzGrotesk-LightCond.otf ); }
 @font-face { font-family: 'AkzidenzGrotesk'; src: url( ../fnt/AkzidenzGrotesk-MediumCondAlt.otf ); }
+@font-face { font-family: 'AkzidenzGroteskLight'; src: url( ../fnt/AkzidenzGrotesk-LightCond.otf ); }
 @font-face { font-family: 'AkzidenzGroteskBold'; src: url( ../fnt/AkzidenzGrotesk-BoldCondAlt.otf ); }
 
 html, body {
@@ -12,8 +12,13 @@ html, body {
 body {
 	background-color: #000;
 	font: normal normal normal 16px AkzidenzGrotesk;
+	letter-spacing: 1px;
 	text-align: center;
 	margin: 0px;
+}
+
+h4 {
+	margin-top: 0;
 }
 
 #content {
@@ -40,7 +45,6 @@ body {
 	font-size: 100%;
 	font-weight: 300;
 	font-family: AkzidenzGrotesk, sans-serif;
-	letter-spacing: 1px;
 	opacity: 0.5;
 	-moz-opacity: 0.5;
 	filter:alpha(opacity=50);
@@ -137,6 +141,13 @@ body {
 
 /******		Navigation		******/
 
+#navwrap:hover {
+	bottom: 0px;
+	left: 0px;
+	padding-top: 50px;
+	position: absolute;
+}
+
 #nav {
 	background-color: rgb(250, 245, 220);
 	bottom: 0px;
@@ -146,7 +157,7 @@ body {
 	padding: 0;
 	position: absolute;
 	width: 100%;
-	z-index: 0;
+	z-index: 10;
 }
 	#nav li {
 		display: inline-block;
@@ -224,7 +235,6 @@ body {
 				content: attr(title);
 				font-family: AkzidenzGroteskLight;
 				left: -35px;
-				letter-spacing: 1px;
 				padding: 5px 10px;
 				position: absolute;
 				text-align: center;
@@ -240,8 +250,29 @@ body {
 
 /******		Modals		******/
 
+#info-nav {
+	margin: 0;
+}
+
 #info-modal {
 	background-color: rgb(250, 245, 220);
 	font-family: AkzidenzGrotesk;
+	height: 360px;
 	text-align: left;
+	overflow: hidden;
 }
+	#info-modal .modal-body {
+		height: 251px;
+	}
+	#info-sidebar, #info-content {
+		float: left;
+		height: inherit;
+		width: 255px;
+	}
+	#info-sidebar {
+		padding-right: 20px;
+		overflow: visible;
+	}
+	#info-content {
+		overflow: scroll;
+	}

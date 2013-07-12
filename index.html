@@ -12,7 +12,7 @@
 			<h5 id="preline">das stadtmuseum wiesbaden<br />
 				präsentiert</h5>
 			<h1 id="headline">BE KENNEDY</h1>
-			<img id="subline" src="fnt/subline.png" alt="Erlebe Wiesbaden aus Kennedys Sicht"/>
+			<img id="subline" src="fnt/subline.png" alt="Erlebe Wiesbaden aus Kennedys Sicht" />
 			<div id="playwrap">
 				<a href="#video1" onclick="resetNav(); playVideo($(this).attr('href'))">
 					<img id="playimage" src="img/playimage.png" />
@@ -23,99 +23,101 @@
 				<img id="envelope" src="img/envelope.jpg" />
 			</div>
 		</div>
-		<ul id="nav">
-			<li class="active">
-				<a href="#video1" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Landung">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">18:20</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video2" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Im Hotel">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">18:25</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video3" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Treffen mit Erhard">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">18:30</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video4" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Fahrt zum Kurhaus">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">19:00</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video5" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Vor dem kurhaus">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">19:40</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video6" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Im Kurshaus">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">19:45</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video7" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Vor dem Hotel">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">20:20</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video8" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Auf dem Hotelzimmer">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">20:25</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video9" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Fr&uuml;hst&uuml;ck">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">07:00</span>
-				</a>
-			</li>
-			<li>
-				<a href="#video10" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Abflug">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">08:05</span>
-				</a>
-			</li>
-			<li class="nopopover">
-				<a href="#info-modal" onclick="navigate($(this))" data-toggle="modal">
-					<span class="dot"></span>
-					<span class="text">Infos</span>
-				</a>
-			</li>
-			<li id="audio" class="nopopover">
-				<a href="#audio">
-					<span class="text"><img src="ico/audio.png" /></span>
-				</a>
-			</li>
-		</ul>
+		<!-- <div id="navwrap"> -->
+			<ul id="nav">
+				<li class="active">
+					<a href="#video1" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Landung">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">18:20</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video2" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Im Hotel">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">18:25</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video3" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Treffen mit Erhard">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">18:30</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video4" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Fahrt zum Kurhaus">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">19:00</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video5" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Vor dem Kurhaus">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">19:40</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video6" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Im Kurshaus">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">19:45</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video7" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Vor dem Hotel">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">20:20</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video8" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Auf dem Hotelzimmer">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">20:25</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video9" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Fr&uuml;hst&uuml;ck">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">07:00</span>
+					</a>
+				</li>
+				<li>
+					<a href="#video10" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Abflug">
+						<span class="dot"></span>
+						<span class="nav-progressbg"></span>
+						<span class="nav-progress"></span>
+						<span class="text">08:05</span>
+					</a>
+				</li>
+				<li class="nopopover">
+					<a href="#info-modal" onclick="navigate($(this))" data-toggle="modal">
+						<span class="dot"></span>
+						<span class="text">Infos</span>
+					</a>
+				</li>
+				<li id="audio" class="nopopover">
+					<a href="#audio">
+						<span class="text"><img src="ico/audio.png" /></span>
+					</a>
+				</li>
+			</ul>
+		<!-- </div> -->
 		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="hideVideoframe()">×</button>
 		<video id="videoframe">
 			<source id="video" src="vid/video1.mp4" type="video/mp4">
@@ -139,7 +141,7 @@
 				</ul>
 			</div>
 		    <div class="modal-body">
-		      <p>AJAX Content here...</p>
+		      <p>Bitte aktivieren Sie Javascript.</p>
 		    </div>
 		</div>
 		<script src="http://code.jquery.com/jquery.js"></script>

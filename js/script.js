@@ -6,7 +6,6 @@ var barWidth = $('.nav-progressbg').first().width();
 $(document).ready(function() {
 	// init
 	$.get("info/ausstellung.html", function(data){
-		console.log("Data: " + data);
 		$("#info-modal .modal-body").html(data);
 	});
 	
@@ -27,16 +26,8 @@ $(document).ready(function() {
 		resetNav();
 	});
 	
-	$("#info-modal #info-ausstellung").click(function() {
-		$.get("info/ausstellung.html", function(data){
-			console.log("Data: " + data);
-			$("#info-modal .modal-body").html(data);
-		});
-	});
-	
-	$("#info-modal #info-kontakt").click(function() {
-		$.get("info/kontakt.html", function(data){
-			console.log("Data: " + data);
+	$("#info-modal #info-nav a").click(function(event) {
+		$.get("info/" + $(this).attr("id").substring(5) + ".html", function(data){
 			$("#info-modal .modal-body").html(data);
 		});
 	});
@@ -47,7 +38,7 @@ $(document).ready(function() {
 
 function centerVideoFrame() {
 	// setup videoframe
-	$("#videoframe").height($(document).height() - $('#nav').height());
+	// $("#videoframe").height($(document).height() - $('#nav').height());
 	// center videoframe
 	$("#videoframe").css("margin-left", ($(document).width() - $("#videoframe").height() / h * w) / 2);
 }
@@ -76,6 +67,8 @@ function showVideoframe() {
 		centerVideoFrame();
 		$("#videoframe").show();
 		$("#video-closebutton").show();
+		
+		$("#navwrap").animate({bottom: -$("#nav").height()});
 	}
 }
 
@@ -84,6 +77,8 @@ function hideVideoframe() {
 		$("#videoframe").hide();
 		$("#video-closebutton").hide();
 		pauseVideo();
+		
+		$("#navwrap").animate({bottom: 0});
 	}
 }
 
