@@ -1,8 +1,8 @@
 /******		General		******/
 
-@font-face { font-family: 'AkzidenzGroteskLight'; src: url( fnt/AkzidenzGrotesk-LightCond.otf ); }
-@font-face { font-family: 'AkzidenzGrotesk'; src: url( fnt/AkzidenzGrotesk-MediumCondAlt.otf ); }
-@font-face { font-family: 'AkzidenzGroteskBold'; src: url( fnt/AkzidenzGrotesk-BoldCondAlt.otf ); }
+@font-face { font-family: 'AkzidenzGroteskLight'; src: url( ../fnt/AkzidenzGrotesk-LightCond.otf ); }
+@font-face { font-family: 'AkzidenzGrotesk'; src: url( ../fnt/AkzidenzGrotesk-MediumCondAlt.otf ); }
+@font-face { font-family: 'AkzidenzGroteskBold'; src: url( ../fnt/AkzidenzGrotesk-BoldCondAlt.otf ); }
 
 html, body {
 	height: 100%;
@@ -17,7 +17,7 @@ body {
 }
 
 #content {
-	background: #000 url(img/bg.jpg) no-repeat scroll 0 50px;
+	background: #000 url(../img/bg.jpg) no-repeat scroll 0 50px;
 	color: rgb(250, 245, 220);
 	height: 100%;
 	margin: 0 auto;
@@ -34,10 +34,17 @@ body {
 /******		Content		******/
 
 #preline {
-	margin: 30px 0 10px;
+	border-bottom: 1px solid;
+	margin: 2% auto 1%;
+	padding-bottom: 10px;
 	font-size: 100%;
 	font-weight: 300;
-	font-family: AkzidenzGroteskLight, sans-serif;
+	font-family: AkzidenzGrotesk, sans-serif;
+	letter-spacing: 1px;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+	filter:alpha(opacity=50);
+	width: 250px;
 }
 
 #headline {
@@ -90,12 +97,12 @@ body {
 	}
 	#envelope {
 		background-color: #FDA;
-		bottom: -20px;
+		bottom: 10px;
 		height: 250px;
 		right: -50px;
 		margin: 0px auto;
 		position: absolute;
-		width: 400px;
+		width: 450px;
 		z-index: -1;
 		-webkit-transform: rotate(-10deg);
 		-moz-transform: rotate(-10deg);
@@ -104,12 +111,27 @@ body {
 
 /******		Video		******/
 
+#video-closebutton {
+	display: none;
+	font-size: 200%;
+	line-height: 30px;
+	text-shadow: #FFF 0 0 2px;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	opacity: .8;
+	-moz-opacity: .8;
+		filter:alpha(opacity=0.8);
+	z-index: 10;
+}
+
 #videoframe {
 	display: none;
 	margin: 0 auto;
 	position: absolute;
 	top: 0;
 	height: 100%;
+/*	width: 0;*/
 }
 
 
@@ -145,10 +167,10 @@ body {
 			margin: 0px auto 10px;
 			width: 10px;
 		}
-			#nav li.active .dot, #nav li.active .progress, #nav li a:hover .dot {
+			#nav li.active .dot, #nav li.active .nav-progress, #nav li a:hover .dot {
 				background-color: rgb(185, 80, 50);
 			}
-		#nav .progressbg {
+		#nav .nav-progressbg {
 			background-color: rgb(0, 0, 0);
 			background-color: rgba(0, 0, 0, 0.5);
 			box-shadow: rgba(0,0,0,0.2) 0 7px 4px;
@@ -159,7 +181,7 @@ body {
 			width: 53px;
 			z-index: -1;
 		}
-		#nav .progress {
+		#nav .nav-progress {
 			background-color: rgb(185, 80, 50);
 			height: 2px;
 			position: absolute;
@@ -200,12 +222,14 @@ body {
 				background-color: rgba(255, 255, 255, 0.5);
 				color: #FFF;
 				content: attr(title);
+				font-family: AkzidenzGroteskLight;
 				left: -35px;
+				letter-spacing: 1px;
 				padding: 5px 10px;
 				position: absolute;
 				text-align: center;
 				top: -43px;
-				width: 95px;
+				width: 107px;
 				white-space: nowrap;
 				z-index: 5;
 			}
@@ -218,5 +242,6 @@ body {
 
 #info-modal {
 	background-color: rgb(250, 245, 220);
-	
+	font-family: AkzidenzGrotesk;
+	text-align: left;
 }
