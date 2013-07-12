@@ -1,0 +1,222 @@
+/******		General		******/
+
+@font-face { font-family: 'AkzidenzGroteskLight'; src: url( fnt/AkzidenzGrotesk-LightCond.otf ); }
+@font-face { font-family: 'AkzidenzGrotesk'; src: url( fnt/AkzidenzGrotesk-MediumCondAlt.otf ); }
+@font-face { font-family: 'AkzidenzGroteskBold'; src: url( fnt/AkzidenzGrotesk-BoldCondAlt.otf ); }
+
+html, body {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	background-color: #000;
+	font: normal normal normal 16px AkzidenzGrotesk;
+	text-align: center;
+	margin: 0px;
+}
+
+#content {
+	background: #000 url(img/bg.jpg) no-repeat scroll 0 50px;
+	color: rgb(250, 245, 220);
+	height: 100%;
+	margin: 0 auto;
+	/*padding-bottom: 50px;*/
+	overflow: hidden;
+	position: relative;
+	width: 978px;
+}
+	#content > img {
+		display: block;
+	}
+
+
+/******		Content		******/
+
+#preline {
+	margin: 30px 0 10px;
+	font-size: 100%;
+	font-weight: 300;
+	font-family: AkzidenzGroteskLight, sans-serif;
+}
+
+#headline {
+	font: normal normal bold 120px AkzidenzGroteskBold, sans-serif;
+	margin: 0;
+	text-shadow: #000 7px 7px 7px;
+	text-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
+	letter-spacing: 2px;
+}
+
+#subline {
+	margin: 0px auto;
+	width: 500px;
+}
+
+#playwrap {
+	margin: 0px auto;
+	position: relative;
+	width: 500px;
+	z-index: 0;
+}
+	#playwrap a {
+		height: 100%;
+		width: 100%;
+	}
+	#playimage {
+		width: 100%;
+	}
+	#playbutton {
+		background-color: rgb(255,255,255);
+		background-color: rgba(255,255,255, 0.7);
+		border-radius: 35px;
+		box-shadow: #000 3px 5px 7px;
+		left: 230px;
+		height: 70px;
+		position: absolute;
+		top: 135px;
+		width: 70px;
+	}
+		#playbutton img {
+			height: 50px;
+			margin: 10px 9px 10px 11px;
+			width: 50px;
+		}
+	a:hover #playbutton {
+		background-color: rgb(255,255,255);
+		background-color: rgba(255,255,255, 0.9);
+		box-shadow: none;
+/*		box-shadow: #EEE 0 0 5px;*/
+	}
+	#envelope {
+		background-color: #FDA;
+		bottom: -20px;
+		height: 250px;
+		right: -50px;
+		margin: 0px auto;
+		position: absolute;
+		width: 400px;
+		z-index: -1;
+		-webkit-transform: rotate(-10deg);
+		-moz-transform: rotate(-10deg);
+	}
+
+
+/******		Video		******/
+
+#videoframe {
+	display: none;
+	margin: 0 auto;
+	position: absolute;
+	top: 0;
+	height: 100%;
+}
+
+
+/******		Navigation		******/
+
+#nav {
+	background-color: rgb(250, 245, 220);
+	bottom: 0px;
+/*	font-family: AkzidenzGroteskLight, sans-serif;*/
+	left: 0px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	width: 100%;
+	z-index: 0;
+}
+	#nav li {
+		display: inline-block;
+		height: 30px;
+		list-style-type: none;
+		overflow: visible;
+		padding: 15px 0;
+		position: relative;
+		width: 50px;
+	}
+		#nav .dot {
+			background-color: rgb(0, 0, 0);
+			background-color: rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			box-shadow: rgba(0,0,0,0.07) 0px 7px 3px;
+			display: block;
+			height: 10px;
+			margin: 0px auto 10px;
+			width: 10px;
+		}
+			#nav li.active .dot, #nav li.active .progress, #nav li a:hover .dot {
+				background-color: rgb(185, 80, 50);
+			}
+		#nav .progressbg {
+			background-color: rgb(0, 0, 0);
+			background-color: rgba(0, 0, 0, 0.5);
+			box-shadow: rgba(0,0,0,0.2) 0 7px 4px;
+			height: 2px;
+			position: absolute;
+			top: 4px;
+			left: 50%;
+			width: 53px;
+			z-index: -1;
+		}
+		#nav .progress {
+			background-color: rgb(185, 80, 50);
+			height: 2px;
+			position: absolute;
+			top: 4px;
+			left: 50%;
+			width: 0;
+			z-index: -1;
+		}
+		#nav .text {
+			margin-bottom: 10px;
+		}
+		
+	#nav #audio {
+		position: absolute;
+		right: 50px;
+	}
+		#nav #audio a {
+			background-color: rgb(0, 0, 0);
+			background-color: rgba(0, 0, 0, 0.5);
+			border-radius: 15px;
+			height: 25px;
+			width: 25px;
+		}
+		#nav #audio img {
+			margin: 5px 5px 5px 4px;
+		}
+		
+		#nav li a {
+			color: #000;
+			display: block;
+			height: 100%;
+			position: relative;
+			text-decoration: none;
+			width: 100%;
+		}
+			#nav li a:hover:before {
+				background-color: rgb(255,255,255);
+				background-color: rgba(255, 255, 255, 0.5);
+				color: #FFF;
+				content: attr(title);
+				left: -35px;
+				padding: 5px 10px;
+				position: absolute;
+				text-align: center;
+				top: -43px;
+				width: 95px;
+				white-space: nowrap;
+				z-index: 5;
+			}
+			#nav li.nopopover a:hover:before {
+				content: none;
+			}
+
+
+/******		Modals		******/
+
+#info-modal {
+	background-color: rgb(250, 245, 220);
+	
+}
