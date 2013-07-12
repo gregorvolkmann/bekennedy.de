@@ -141,7 +141,7 @@ h4 {
 
 /******		Navigation		******/
 
-#navwrap:hover {
+#navwrap {
 	bottom: 0px;
 	left: 0px;
 	padding-top: 50px;
@@ -153,7 +153,7 @@ h4 {
 	bottom: 0px;
 /*	font-family: AkzidenzGroteskLight, sans-serif;*/
 	left: 0px;
-	margin: 0;
+	margin: 50px 0 0;
 	padding: 0;
 	position: absolute;
 	width: 100%;
@@ -254,13 +254,16 @@ h4 {
 	margin: 0;
 }
 
-#info-modal {
-	background-color: rgb(250, 245, 220);
+#info-modal.modal {
+	background: transparent url(../img/info-modal-bg.png) no-repeat scroll top left;
 	font-family: AkzidenzGrotesk;
 	height: 360px;
 	text-align: left;
-	overflow: hidden;
+	overflow: visible;
 }
+	#info-modal .modal-header {
+		border: none;
+	}
 	#info-modal .modal-body {
 		height: 251px;
 	}
