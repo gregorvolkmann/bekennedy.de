@@ -209,13 +209,7 @@ h4 {
 		position: absolute;
 		right: 50px;
 	}
-		#nav #audio a {
-			background-color: rgb(0, 0, 0);
-			background-color: rgba(0, 0, 0, 0.5);
-			border-radius: 15px;
-			height: 25px;
-			width: 25px;
-		}
+	
 		#nav #audio img {
 			margin: 5px 5px 5px 4px;
 		}
@@ -253,19 +247,26 @@ h4 {
 #info-nav {
 	margin: 0;
 }
+#info-nav li a {
+	height: 45px;
+}
 
 #info-modal.modal {
 	background: transparent url(../img/info-modal-bg.png) no-repeat scroll top left;
 	font-family: AkzidenzGrotesk;
-	height: 360px;
+	height: 405px;
 	text-align: left;
+	margin-left: -317px;
 	overflow: visible;
+	width: 634px;
 }
 	#info-modal .modal-header {
 		border: none;
 	}
 	#info-modal .modal-body {
-		height: 251px;
+		height: 266px;
+		padding-top: 0;
+		overflow: visible;
 	}
 	#info-sidebar, #info-content {
 		float: left;
@@ -279,3 +280,10 @@ h4 {
 	#info-content {
 		overflow: scroll;
 	}
+
+#social-buttons {
+	position:fixed;
+	right: 50px;
+	top: 10px;
+	width: 70px;
+}
