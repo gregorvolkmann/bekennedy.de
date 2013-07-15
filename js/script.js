@@ -3,37 +3,6 @@ var w = 4;
 var h = 3;
 var barWidth = $('.nav-progressbg').first().width();
 
-$(document).ready(function() {
-	// init
-	$.get("info/ausstellung.html", function(data){
-		$("#info-modal .modal-body").html(data);
-	});
-	
-	// nav-progress handling
-    $("#videoframe").bind("timeupdate", videoTimeUpdateHandler);
-
-    function videoTimeUpdateHandler(e) {
-        var video = $("#videoframe").get(0);
-        var percent = video.currentTime / video.duration;
-        updateProgressWidth(percent);
-    }
-
-    function updateProgressWidth(percent) {
-        $(".active").last().children().children(".nav-progress").width(percent * barWidth);
-    }
-	
-	$("#info-modal").on('hide', function() {
-		resetNav();
-	});
-	
-	$("#info-modal #info-nav a").click(function(event) {
-		$.get("info/" + $(this).attr("id").substring(5) + ".html", function(data){
-			$("#info-modal .modal-body").html(data);
-		});
-	});
-});
-
-
 // Video
 
 function centerVideoFrame() {
@@ -44,9 +13,11 @@ function centerVideoFrame() {
 }
 
 function playVideo(v) {
-	// load video
-	$("#videoframe").attr("src", "vid/" + v.substring(1) + ".mp4");
-	$("#videoframe")[0].load();
+	if(v) {
+		// load video
+		$("#videoframe").attr("src", "vid/" + v + ".mp4");
+		$("#videoframe")[0].load();
+	}
 	
 	showVideoframe();
 	
@@ -62,7 +33,6 @@ function pauseVideo() {
 }
 
 function showVideoframe() {
-	console.log("show frame");
 	if($("#videoframe").is(':hidden')) {
 		centerVideoFrame();
 		$("#videoframe").show();
@@ -82,7 +52,6 @@ function hideVideoframe() {
 	}
 }
 
-
 // Navigation
 
 function resetNav() {
@@ -91,6 +60,7 @@ function resetNav() {
 }
 
 function navigate(e) {
+	console.log(e);
 	e.parent().prevAll().addClass("active");
 	e.parent().prevAll().children().children(".nav-progress").width(barWidth);
 	e.parent().nextAll().removeClass("active");
@@ -98,3 +68,44 @@ function navigate(e) {
 	e.parent().addClass("active");
 	e.children(".nav-progress").width(0);
 }
+
+function toggleMute(e) {
+	$("#videoframe").prop('muted', !$("#videoframe").prop('muted'));
+	e.toggleClass("muted");
+}
+
+$(document).ready(function() {
+	// init
+	$.get("info/ausstellung.html", function(data){
+		$("#info-modal .modal-body").html(data);
+	});
+	
+	$("#info-modal").on('hide', function() {
+		resetNav();
+	});
+	
+	// nav-progress handling
+    $("#videoframe").bind("timeupdate", videoTimeUpdateHandler);
+    function videoTimeUpdateHandler(e) {
+        var video = $("#videoframe").get(0);
+        var percent = video.currentTime / video.duration;
+        updateProgressWidth(percent);
+    }
+    function updateProgressWidth(percent) {
+        $(".active").last().children().children(".nav-progress").width(percent * barWidth);
+    }
+	
+	$("#nav li a").click(function(event) {
+		if(!$(this).hasClass("novideo")) {
+			navigate($(this));
+			playVideo($(this).attr('href').substring(1));
+			$("#info-modal").modal('hide');
+		}
+	});
+	
+	$("#info-modal #info-nav a").click(function(event) {
+		$.get("info/" + $(this).attr("id").substring(5) + ".html", function(data){
+			$("#info-modal .modal-body").html(data);
+		});
+	});
+});

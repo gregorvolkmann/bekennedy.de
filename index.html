@@ -1,23 +1,26 @@
 <!-- 
 TODO
 
-audio button
+# audio button
 
-nav element 20:20 rem
+# nav element 20:20 rem
 
-preline wrapped
+# preline wrapped
 
-socialbar + close button aligning
+# socialbar + close button aligning
 
-info modal größer
-info modal nav elements
+# info modal größer
+# info modal nav elements
 info modal kein backdrop
+info modal nav active
 info modal büroklammer
 info modal image position
 
 video start card flip
 
 question modal
+
+ambiente audio
 
 SONSTIGES
 body bg coins
@@ -36,9 +39,9 @@ nav element clicked border
 		<link href="css/style.css" rel="stylesheet" />
 	</head>
 	<body>
+		<h5 id="preline">das stadtmuseum wiesbaden<br />
+			präsentiert</h5>
 		<div id="content">
-			<h5 id="preline">das stadtmuseum wiesbaden<br />
-				präsentiert</h5>
 			<h1 id="headline">BE KENNEDY</h1>
 			<img id="subline" src="fnt/subline.png" alt="Erlebe Wiesbaden aus Kennedys Sicht" />
 			<div id="playwrap">
@@ -54,7 +57,7 @@ nav element clicked border
 		<!-- <div id="navwrap"> -->
 			<ul id="nav">
 				<li class="active">
-					<a href="#video1" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Landung">
+					<a href="#video1" title="Landung">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -62,7 +65,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video2" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Im Hotel">
+					<a href="#video2" title="Im Hotel">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -70,7 +73,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video3" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Treffen mit Erhard">
+					<a href="#video3" title="Treffen mit Erhard">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -78,7 +81,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video4" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Fahrt zum Kurhaus">
+					<a href="#video4" title="Fahrt zum Kurhaus">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -86,7 +89,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video5" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Vor dem Kurhaus">
+					<a href="#video5" title="Vor dem Kurhaus">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -94,23 +97,23 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video6" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Im Kurshaus">
+					<a href="#video6" title="Im Kurhaus">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
 						<span class="text">19:45</span>
 					</a>
 				</li>
-				<li>
-					<a href="#video7" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Vor dem Hotel">
+				<!-- <li>
+					<a href="#video7" title="Vor dem Hotel">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
 						<span class="text">20:20</span>
 					</a>
-				</li>
+				</li> -->
 				<li>
-					<a href="#video8" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Auf dem Hotelzimmer">
+					<a href="#video7" title="Auf dem Hotelzimmer">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -118,7 +121,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video9" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Fr&uuml;hst&uuml;ck">
+					<a href="#video8" title="Fr&uuml;hst&uuml;ck">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -126,7 +129,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li>
-					<a href="#video10" onclick="navigate($(this)); playVideo($(this).attr('href'))" title="Abflug">
+					<a href="#video9" title="Abflug">
 						<span class="dot"></span>
 						<span class="nav-progressbg"></span>
 						<span class="nav-progress"></span>
@@ -134,37 +137,35 @@ nav element clicked border
 					</a>
 				</li>
 				<li class="nopopover">
-					<a href="#info-modal" onclick="navigate($(this))" data-toggle="modal">
+					<a href="#info-modal" class="novideo" onclick="navigate($(this))" data-toggle="modal">
 						<span class="dot"></span>
 						<span class="text">Infos</span>
 					</a>
 				</li>
 				<li id="audio" class="nopopover">
-					<a href="#audio">
-						<span class="text"><img src="ico/audio.png" /></span>
-					</a>
+					<a href="#audio" class="novideo nonav" onclick="toggleMute($(this))"></a>
 				</li>
 			</ul>
 		<!-- </div> -->
-		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="hideVideoframe()">×</button>
+		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="hideVideoframe(); resetNav()">×</button>
 		<video id="videoframe">
 			<source id="video" src="vid/video1.mp4" type="video/mp4">
 		</video>
-		<div id="info-modal" class="modal hide fade">
+		<div id="info-modal" class="modal hide fade" data-backdrop="false">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<ul id="info-nav" class="nav nav-pills">
 					<li>
-						<a id="info-ausstellung" href="#info-ausstellung"><img src="fnt/info-ausstellung.png" alt="Kontakt" /></a>
+						<a id="info-ausstellung" href="#info-ausstellung"></a>
 					</li>
 					<li>
-						<a id="info-kontakt" href="#info-kontakt"><img src="fnt/info-kontakt.png" alt="Kontakt" /></a>
+						<a id="info-kontakt" href="#info-kontakt"></a>
 					</li>
 					<li>
-						<a id="info-anfahrt" href="#info-anfahrt"><img src="fnt/info-anfahrt.png" alt="Anfahrt" /></a>
+						<a id="info-anfahrt" href="#info-anfahrt"></a>
 					</li>
 					<li>
-						<a id="info-impressum" href="#info-impressum"><img src="fnt/info-impressum.png" alt="Impressum" /></a>
+						<a id="info-impressum" href="#info-impressum"></a>
 					</li>
 				</ul>
 			</div>
