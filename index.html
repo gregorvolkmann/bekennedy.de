@@ -11,10 +11,10 @@ TODO
 
 # info modal größer
 # info modal nav elements
-info modal kein backdrop
-info modal nav active
-info modal büroklammer
-info modal image position
+# info modal kein backdrop
+# info modal nav active
+# info modal büroklammer
+# info modal image position
 
 video start card flip
 
@@ -44,9 +44,9 @@ nav element clicked border
 		<div id="content">
 			<h1 id="headline">BE KENNEDY</h1>
 			<img id="subline" src="fnt/subline.png" alt="Erlebe Wiesbaden aus Kennedys Sicht" />
-			<div id="playwrap">
+			<div id="postcardwrap">
 				<a href="#video1" onclick="resetNav(); playVideo($(this).attr('href'))">
-					<img id="playimage" src="img/playimage.png" />
+					<img id="postcard" src="img/postcard.png" />
 					<div id="playbutton">
 							<img src="ico/play.png" />
 					</div>
@@ -156,7 +156,7 @@ nav element clicked border
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<ul id="info-nav" class="nav nav-pills">
 					<li>
-						<a id="info-ausstellung" href="#info-ausstellung"></a>
+						<a id="info-ausstellung" class="active" href="#info-ausstellung"></a>
 					</li>
 					<li>
 						<a id="info-kontakt" href="#info-kontakt"></a>
@@ -173,12 +173,11 @@ nav element clicked border
 		      <p>Bitte aktivieren Sie Javascript.</p>
 		    </div>
 		</div>
-		<div id="question-modal" class="modal hide fade">
+		<div id="quiz-modal" class="modal hide fade">
 			<div class="modal-header">
 				<p id="question"></p>
 			</div>
-			<div class="modal-body">
-			</div>
+			<div class="modal-body"></div>
 		</div>
 
 		<div id="social-buttons" >

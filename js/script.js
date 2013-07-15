@@ -48,6 +48,7 @@ function hideVideoframe() {
 		$("#video-closebutton").hide();
 		pauseVideo();
 		
+		$("#content > *").animate({opacity: 1});
 		$("#navwrap").animate({bottom: 0});
 	}
 }
@@ -60,7 +61,6 @@ function resetNav() {
 }
 
 function navigate(e) {
-	console.log(e);
 	e.parent().prevAll().addClass("active");
 	e.parent().prevAll().children().children(".nav-progress").width(barWidth);
 	e.parent().nextAll().removeClass("active");
@@ -74,15 +74,34 @@ function toggleMute(e) {
 	e.toggleClass("muted");
 }
 
+
 $(document).ready(function() {
 	// init
 	$.get("info/ausstellung.html", function(data){
 		$("#info-modal .modal-body").html(data);
 	});
+
+	$("#info-modal").on('show', function() {
+		$("#content > *").animate({opacity: 0});
+		pauseVideo();
+	});
 	
 	$("#info-modal").on('hide', function() {
-		resetNav();
+		if($("#videoframe").is(':hidden')) {
+			resetNav();
+		} else {
+			// activate video nav element
+		}
 	});
+
+	$("#info-modal").on('hidden', function() {
+		if($("#videoframe").is(':visible')) {
+			$("#videoframe").get(0).play();
+		} else {
+			$("#content > *").animate({opacity: 1});
+		}
+	});
+	
 	
 	// nav-progress handling
     $("#videoframe").bind("timeupdate", videoTimeUpdateHandler);
@@ -95,17 +114,32 @@ $(document).ready(function() {
         $(".active").last().children().children(".nav-progress").width(percent * barWidth);
     }
 	
-	$("#nav li a").click(function(event) {
+	$("#nav li a").click(function() {
 		if(!$(this).hasClass("novideo")) {
 			navigate($(this));
 			playVideo($(this).attr('href').substring(1));
-			$("#info-modal").modal('hide');
+			if($("#info-modal").is(':visible')) {
+				$("#info-modal").modal('hide');
+			}
 		}
 	});
 	
-	$("#info-modal #info-nav a").click(function(event) {
+	$("#info-nav a").click(function() {
+		$("#info-nav a").removeClass("active");
+		$(this).addClass("active");
 		$.get("info/" + $(this).attr("id").substring(5) + ".html", function(data){
 			$("#info-modal .modal-body").html(data);
 		});
+	});
+	
+	$("#videoframe").on("ended", function() {
+		console.log("Video ended");
+		$.get("quiz/question" + $("#videoframe").attr("src").substring(9, 10) + ".html", function(data){
+			$("#quiz-modal .modal-header #question").html(data);
+		});
+		$.get("quiz/answers" + $("#videoframe").attr("src").substring(9, 10) + ".html", function(data){
+			$("#quiz-modal .modal-body").html(data);
+		});
+		$("#quiz-modal").modal("show");
 	});
 });

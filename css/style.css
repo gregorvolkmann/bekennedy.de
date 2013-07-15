@@ -66,17 +66,17 @@ h4 {
 	width: 500px;
 }
 
-#playwrap {
+#postcardwrap {
 	margin: 0px auto;
 	position: relative;
 	width: 500px;
 	z-index: 0;
 }
-	#playwrap a {
+	#postcardwrap a {
 		height: 100%;
 		width: 100%;
 	}
-	#playimage {
+	#postcard {
 		width: 100%;
 	}
 	#playbutton {
@@ -208,11 +208,9 @@ h4 {
 		}
 		
 	#nav #audio {
-/*		padding: 0;*/
 		position: absolute;
 		right: 50px;
 	}
-	
 		#nav #audio a {
 			background-image: url(../ico/audio.png);
 			height: 25px;
@@ -250,14 +248,7 @@ h4 {
 			}
 
 
-/******		Modals		******/
-
-#info-nav {
-	margin: 0;
-}
-#info-nav li a {
-	height: 45px;
-}
+/******		Info Modal		******/
 
 #info-modal.modal {
 	background: transparent url(../img/info-modal-bg.png) no-repeat scroll top left;
@@ -268,67 +259,77 @@ h4 {
 	text-align: left;
 	margin-left: -317px;
 	overflow: visible;
+	top: 130px;
 	width: 634px;
 }
 	#info-modal .modal-header {
 		border: none;
 		padding: 25px 25px 10px;
 	}
-		#info-nav a {
-			padding: 0;
-			margin: 10px;
-			overflow: hidden;
+		#info-nav {
+			margin: 0;
 		}
-		#info-nav #info-ausstellung {
-			background: transparent url(../fnt/info-ausstellung.png) no-repeat scroll top left;
-			height: 45px;
-			width: 106px;
-		}
-			#info-modal #info-ausstellung:hover {
-				background-position: 0 -45px;
+			#info-nav a {
+				height: 45px;
+				padding: 0;
+				margin: 10px;
+				overflow: hidden;
 			}
-		#info-nav #info-kontakt {
-			background: transparent url(../fnt/info-kontakt.png) no-repeat scroll top left;
-			height: 45px;
-			width: 90px;
-		}
-			#info-modal #info-kontakt:hover {
-				background-position: 0 -45px;
+				#info-nav a:hover, #info-nav a.active {
+					background-position: 0 -45px;
+				}
+			#info-ausstellung {
+				background: transparent url(../fnt/info-ausstellung.png) no-repeat scroll top left;
+				height: 45px;
+				width: 106px;
 			}
-		#info-nav #info-anfahrt {
-			background: transparent url(../fnt/info-anfahrt.png) no-repeat scroll top left;
-			height: 45px;
-			width: 90px;
-		}
-			#info-modal #info-anfahrt:hover {
-				background-position: 0 -45px;
+			#info-kontakt {
+				background: transparent url(../fnt/info-kontakt.png) no-repeat scroll top left;
+				height: 45px;
+				width: 90px;
 			}
-		#info-nav #info-impressum {
-			background: transparent url(../fnt/info-impressum.png) no-repeat scroll top left;
-			height: 45px;
-			width: 106px;
-		}
-			#info-modal #info-impressum:hover {
-				background-position: 0 -45px;
+			#info-anfahrt {
+				background: transparent url(../fnt/info-anfahrt.png) no-repeat scroll top left;
+				height: 45px;
+				width: 90px;
+			}
+			#info-impressum {
+				background: transparent url(../fnt/info-impressum.png) no-repeat scroll top left;
+				height: 45px;
+				width: 106px;
 			}
 	#info-modal .modal-body {
 		height: 266px;
 		padding: 0 25px 25px;
 		overflow: visible;
 	}
-	#info-sidebar, #info-content {
-		float: left;
-		height: inherit;
-		width: 282px;
-	}
-	#info-sidebar {
-		padding-right: 20px;
-		overflow: visible;
-	}
-	#info-content {
-		overflow: hidden;
-	}
+		#info-sidebar, #info-content {
+			float: left;
+			height: inherit;
+			width: 282px;
+		}
+		#info-sidebar {
+			padding-right: 20px;
+			overflow: visible;
+		}
+		#info-content {
+			overflow: hidden;
+		}
 
+
+/******		Info Modal		******/
+#quiz-modal {
+	background-color: rgb(250, 245, 220);
+	text-align: left;
+}
+	#quiz-modal .modal-body form {
+		height: 100%;
+		width: 100%;
+	}
+	
+	
+	
+	
 #social-buttons {
 	position:fixed;
 	right: 50px;
