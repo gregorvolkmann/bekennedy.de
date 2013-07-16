@@ -147,7 +147,7 @@ nav element clicked border
 					</a>
 				</li>
 				<li id="audio" class="nopopover">
-					<a href="#audio" class="novideo nonav" onclick="toggleMute($(this))"></a>
+					<a href="#audio" class="novideo nonav" onclick="toggleMute()"></a>
 				</li>
 			</ul>
 		</div>
@@ -185,9 +185,9 @@ nav element clicked border
 				<p id="question"></p>
 			</div>
 			<div class="modal-body">
-				<form onsubmit="submitAnswer(); return false;">
+				<form onsubmit="submitAnswer(); return false">
 					<fieldset>
-						<input id="submitAnswer" type="submit" class="btn btn-link" value="&rarr;">
+						<input id="submitAnswerButton" type="submit" class="btn btn-link" value="&#9658;">
 					</fieldset>
 				</form>
 			</div>

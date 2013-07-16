@@ -1,48 +1,43 @@
 // var $video = $("#videoframe");
 var w = 4;
 var h = 3;
-var barWidth = $('.nav-progressbg').first().width();
+var progressbarWidth = $('.nav-progressbg').first().width();
 
 // Video
-
-function centerVideoFrame() {
-	$("#videoframe").css("margin-left", ($(document).width() - $("#videoframe").height() / h * w) / 2);
-}
-
-function playVideo(v) {
+function playVideo(v, $f) {
 	if(v != null) {
 		// load video
-		$("#videoframe").attr("src", "vid/" + v + ".mp4");
-		$("#videoframe")[0].load();
+		$f.attr("src", "vid/" + v + ".mp4");
+		$f[0].load();
 	}
 	
-	showVideoframe();
+	showFrame($f);
 	
-	if($("#videoframe").get(0).paused) {
-		$("#videoframe").get(0).play();
+	if($f.get(0).paused) {
+		$f.get(0).play();
 	}
 }
 
-function pauseVideo() {
-	if(!$("#videoframe").get(0).paused) {
-		$("#videoframe").get(0).pause();
+function pauseVideo($f) {
+	if($f && !$f.get(0).paused) {
+		$f.get(0).pause();
 	}
 }
 
-function showVideoframe() {
-	if($("#videoframe").is(':hidden')) {
-		centerVideoFrame();
-		$("#videoframe").show();
-		$("#video-closebutton").show();
+function showFrame($f) {
+	if($f.is(':hidden')) {
+		$f.css("margin-left", ($(document).width() - $f.height() / h * w) / 2);
+		$f.show();
+		$("#frame-closebutton").show();
 		
 		$("#nav").animate({bottom: -$("#nav").height()});
 	}
 }
 
-function hideVideoframe() {
-	if($("#videoframe").is(':visible')) {
-		$("#videoframe").hide();
-		$("#video-closebutton").hide();
+function hideFrame($f) {
+	if($f.is(':visible')) {
+		$f.hide();
+		$("#frame-closebutton").hide();
 		pauseVideo();
 		
 		$("#content > *").animate({opacity: 1});
@@ -50,20 +45,12 @@ function hideVideoframe() {
 	}
 }
 
-function showAnswerframe() {
-	if($("#answerframe").is(':hidden')) {
-		$("#answerframe").show();
-		$("#video-closebutton").show();
-		
-		$("#nav").animate({bottom: -$("#nav").height()});
-	}
-}
-
 function submitAnswer() {
+	console.log($("input[name=answer]:radio:checked").val());
 	if($("input[name=answer]:radio:checked").val()) {
-		showAnswerframe();
+		showFrame($("#answerframe"));
 		$("#quiz-modal").modal("hide");
-		hideVideoframe();
+		hideFrame($("#videoframe"));
 		
 		if($("#answerframe").get(0).paused) {
 			$("#answerframe").get(0).play();
@@ -82,16 +69,17 @@ function resetNav() {
 
 function navigate(e) {
 	e.parent().prevAll().addClass("active");
-	e.parent().prevAll().children().children(".nav-progress").width(barWidth);
+	e.parent().prevAll().children().children(".nav-progress").width(progressbarWidth);
 	e.parent().nextAll().removeClass("active");
 	e.parent().nextAll().children().children(".nav-progress").width(0);
 	e.parent().addClass("active");
 	e.children(".nav-progress").width(0);
 }
 
-function toggleMute(e) {
+function toggleMute() {
 	$("#videoframe").prop('muted', !$("#videoframe").prop('muted'));
-	e.toggleClass("muted");
+	$("#answerframe").prop('muted', !$("#videoframe").prop('muted'));
+	$("#audio a").toggleClass("muted");
 }
 
 
@@ -107,7 +95,7 @@ $(document).ready(function() {
 	});
 	
 	$("#info-modal").on('hide', function() {
-		if($("#videoframe").is(':hidden')) {
+		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
 			resetNav();
 		} else {
 			// activate video nav element
@@ -117,6 +105,8 @@ $(document).ready(function() {
 	$("#info-modal").on('hidden', function() {
 		if($("#videoframe").is(':visible')) {
 			$("#videoframe").get(0).play();
+		} else if($("#answerframe").is(':visible')) {
+			$("#answerframe").get(0).play();
 		} else {
 			$("#content > *").animate({opacity: 1});
 		}
@@ -131,13 +121,13 @@ $(document).ready(function() {
         updateProgressWidth(percent);
     }
     function updateProgressWidth(percent) {
-        $(".active").last().children().children(".nav-progress").width(percent * barWidth);
+        $(".active").last().children().children(".nav-progress").width(percent * progressbarWidth);
     }
 
 	$("#nav li a, #postcardwrap a").click(function() {
 		if(!$(this).hasClass("novideo")) {
 			navigate($(this));
-			playVideo($(this).attr('href').substring(1));
+			playVideo($(this).attr('href').substring(1), $("#videoframe"));
 			if($("#info-modal").is(':visible')) {
 				$("#info-modal").modal('hide');
 			}

@@ -332,6 +332,7 @@ h4 {
 }
 	#quiz-modal .modal-header {
 		border: none;
+		font-family: 5px AkzidenzGroteskBold, sans-serif;
 		padding: 65px 155px 10px 40px;
 	}
 	#quiz-modal .modal-body {
