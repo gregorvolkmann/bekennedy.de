@@ -16,9 +16,9 @@ TODO
 # info modal büroklammer
 # info modal image position
 
-question modal
+# question modal
 
-nav hover handler
+# nav hover handler
 
 video start card flip
 
@@ -27,9 +27,9 @@ ambiente audio
 overlay management
 
 SONSTIGES
-body bg coins
-bodyhöhe anpassen
-nav progressbg seamless
+# body bg coins
+# bodyhöhe anpassen
+# nav progressbg seamless
 nav element clicked border
 
  -->
@@ -48,6 +48,8 @@ nav element clicked border
 		<div id="content">
 			<h1 id="headline">BE KENNEDY</h1>
 			<img id="subline" src="fnt/subline.png" alt="Erlebe Wiesbaden aus Kennedys Sicht" />
+			<img id="muenze" src="img/muenze.png" />
+			<img id="muenze2" src="img/muenze2.png" />
 			<div id="postcardwrap">
 				<a href="#video1" title="Be Kennedy">
 					<img id="postcard" src="img/postcard.png" />
@@ -56,6 +58,7 @@ nav element clicked border
 					</div>
 				</a>
 				<img id="envelope" src="img/envelope.jpg" />
+				<img id="bueroklammer3" src="img/bueroklammer3.png" />
 			</div>
 		</div>
 		<div id="navwrap">
@@ -151,10 +154,11 @@ nav element clicked border
 				</li>
 			</ul>
 		</div>
-		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="hideVideoframe(); resetNav()">×</button>
+		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="videoframe">
 			<source id="storyvideo" src="vid/video1.mp4" type="video/mp4">
 		</video>
+		<button id="answer-closebutton" type="button" class="close" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="answerframe">
 			<source id="answervideo" type="video/mp4">
 		</video>

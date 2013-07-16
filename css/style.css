@@ -40,8 +40,9 @@ h4 {
 
 #preline {
 	border-bottom: 1px solid;
-	color: rgb(250, 245, 220);
+	color: rgb(255, 255, 255);
 	margin: 0 auto;
+	margin-top:1%;
 	padding: 10px;
 	font-size: 100%;
 	font-weight: 300;
@@ -53,22 +54,61 @@ h4 {
 }
 
 #headline {
-	font: normal normal bold 120px AkzidenzGroteskBold, sans-serif;
-	margin: 0;
+	font: normal normal bold 110px AkzidenzGroteskBold, sans-serif;
+	margin: 0px;
+	margin-top: 3%;
 	text-shadow: #000 7px 7px 7px;
 	text-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
 	letter-spacing: 2px;
 }
 
 #subline {
-	margin: 0px auto;
-	width: 500px;
+	margin: -10px auto;
+	width: 490px;
+	margin-left: 24%;
+}
+
+#muenze {
+
+	-moz-transform: rotate(20deg);
+	-ms-transform: rotate(20deg);
+	-o-transform: rotate(8deg);
+	-webkit-transform: rotate(-14deg);
+	left: 230px;
+	position: absolute;
+	transform: rotate(20deg);
+	top: 230px;
+}
+
+#muenze2 {
+
+	-moz-transform: rotate(20deg);
+	-ms-transform: rotate(20deg);
+	-o-transform: rotate(8deg);
+	-webkit-transform: rotate(-14deg);
+	left: 200px;
+	position: absolute;
+	transform: rotate(20deg);
+	top: 370px;
+}
+
+#bueroklammer3 {
+
+	-moz-transform: rotate(20deg);
+	-ms-transform: rotate(20deg);
+	-o-transform: rotate(8deg);
+	-webkit-transform: rotate(7deg);
+	left: 435px;
+	position: absolute;
+	transform: rotate(-40deg);
+	top: 0px;
 }
 
 #postcardwrap {
 	margin: 0px auto;
+	margin-top: 1.5%;
 	position: relative;
-	width: 500px;
+	width: 440px;
 	z-index: 0;
 }
 	#postcardwrap a {
@@ -80,19 +120,20 @@ h4 {
 	}
 	#playbutton {
 		background-color: rgb(255,255,255);
-		background-color: rgba(255,255,255, 0.9);
+		background-color: rgba(255,255,255, 0.5);
 		border-radius: 35px;
 		box-shadow: #000 3px 5px 5px;
-		box-shadow: rgba(0, 0, 0, 0.9) 3px 5px 5px;
-		left: 230px;
-		height: 70px;
+		box-shadow: rgba(0, 0, 0, 0.5) 3px 5px 5px;
+		left: 50%;
+		height: 60px;
+		margin: -30px 0 0 -30px;
 		position: absolute;
-		top: 135px;
-		width: 70px;
+		top: 50%;
+		width: 60px;
 	}
 	a:hover #playbutton {
 		background-color: rgb(255,255,255);
-		background-color: rgba(255,255,255, 1);
+		background-color: rgba(255,255,255, 0.9);
 /*		box-shadow: none;*/
 	}
 	a:active #playbutton {
@@ -102,27 +143,27 @@ h4 {
 		top: 137px;
 	}
 		#playbutton img {
-			height: 50px;
+			height: 40px;
 			margin: 10px 9px 10px 11px;
-			width: 50px;
+			width: 40px;
 		}
 	#envelope {
 		background-color: #FDA;
 		bottom: 10px;
-		height: 250px;
+		height: 230px;
 		right: -50px;
 		margin: 0px auto;
 		position: absolute;
-		width: 450px;
+		width: 400px;
 		z-index: -1;
-		-webkit-transform: rotate(-10deg);
-		-moz-transform: rotate(-10deg);
+		-webkit-transform: rotate(-9deg);
+		-moz-transform: rotate(-9deg);
 	}
 
 
 /******		Video		******/
 
-#video-closebutton {
+#video-closebutton, #answer-closebutton {
 	display: none;
 	font-size: 200%;
 	line-height: 30px;
@@ -139,7 +180,7 @@ h4 {
 #videoframe, #answerframe{
 	display: none;
 	margin: 0 auto;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	height: 100%;
 }
@@ -152,6 +193,7 @@ h4 {
 	position: fixed;
 	width: 100%;
 	z-index: 10;
+	height: 65px;
 
 }
 	#nav {
@@ -204,7 +246,7 @@ h4 {
 				top: 4px;
 				left: 50%;
 				width: 0;
-				z-index: -1;
+/*				z-index: -1;*/
 			}
 			#nav .text {
 				margin-bottom: 10px;
@@ -243,7 +285,7 @@ h4 {
 					padding: 5px 10px;
 					position: absolute;
 					text-align: center;
-					top: -43px;
+					top: -45px;
 					width: 107px;
 					white-space: nowrap;
 					z-index: 5;
