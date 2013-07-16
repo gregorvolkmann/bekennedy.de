@@ -13,7 +13,7 @@ function centerVideoFrame() {
 }
 
 function playVideo(v) {
-	if(v) {
+	if(v != null) {
 		// load video
 		$("#videoframe").attr("src", "vid/" + v + ".mp4");
 		$("#videoframe")[0].load();
@@ -114,7 +114,7 @@ $(document).ready(function() {
         $(".active").last().children().children(".nav-progress").width(percent * barWidth);
     }
 	
-	$("#nav li a").click(function() {
+	$("#nav li a, #postcardwrap a").click(function() {
 		if(!$(this).hasClass("novideo")) {
 			navigate($(this));
 			playVideo($(this).attr('href').substring(1));
@@ -133,7 +133,6 @@ $(document).ready(function() {
 	});
 	
 	$("#videoframe").on("ended", function() {
-		console.log("Video ended");
 		$.get("quiz/question" + $("#videoframe").attr("src").substring(9, 10) + ".html", function(data){
 			$("#quiz-modal .modal-header #question").html(data);
 		});

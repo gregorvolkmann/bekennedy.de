@@ -81,26 +81,32 @@ h4 {
 	}
 	#playbutton {
 		background-color: rgb(255,255,255);
-		background-color: rgba(255,255,255, 0.7);
+		background-color: rgba(255,255,255, 0.9);
 		border-radius: 35px;
-		box-shadow: #000 3px 5px 7px;
+		box-shadow: #000 3px 5px 5px;
+		box-shadow: rgba(0, 0, 0, 0.9) 3px 5px 5px;
 		left: 230px;
 		height: 70px;
 		position: absolute;
 		top: 135px;
 		width: 70px;
 	}
+	a:hover #playbutton {
+		background-color: rgb(255,255,255);
+		background-color: rgba(255,255,255, 1);
+/*		box-shadow: none;*/
+	}
+	a:active #playbutton {
+		background-color: rgb(255,255,255);
+		background-color: rgba(255,255,255, 1);
+		box-shadow: none;
+		top: 137px;
+	}
 		#playbutton img {
 			height: 50px;
 			margin: 10px 9px 10px 11px;
 			width: 50px;
 		}
-	a:hover #playbutton {
-		background-color: rgb(255,255,255);
-		background-color: rgba(255,255,255, 0.9);
-		box-shadow: none;
-/*		box-shadow: #EEE 0 0 5px;*/
-	}
 	#envelope {
 		background-color: #FDA;
 		bottom: 10px;
@@ -319,15 +325,28 @@ h4 {
 
 /******		Info Modal		******/
 #quiz-modal {
-	background-color: rgb(250, 245, 220);
+	background: transparent url(../img/postcard-back.png) no-repeat scroll top left;
+	border: none;
+	box-shadow: none;
+	height: 355px;
 	text-align: left;
 }
-	#quiz-modal .modal-body form {
-		height: 100%;
-		width: 100%;
+	#quiz-modal .modal-header {
+		border: none;
+		padding: 65px 155px 10px 40px;
 	}
-	
-	
+	#quiz-modal .modal-body {
+/*		height: 100%;*/
+		overflow: visible;
+	}
+	#quiz-modal .modal-body form {
+		padding: 0 25px 25px;
+	}
+	#quiz-modal .modal-body form .btn-link{
+		position: absolute;
+		bottom: -30px;
+		right: 40px;
+	}
 	
 	
 #social-buttons {
