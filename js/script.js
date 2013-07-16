@@ -148,7 +148,7 @@ $(document).ready(function() {
 			$("#quiz-modal .modal-header #question").html(data);
 		});
 		$.get("quiz/answers" + videoNumber + ".html", function(data){
-			$("#quiz-modal #submitAnswer").before(data);
+			$("#quiz-modal #answerButton").before(data);
 			
 			$("input[name=answer]:radio").change(function() {
 				$("#answerframe").attr("src", "vid/video" + videoNumber + "/answer" + $(this).val() + ".mp4");
