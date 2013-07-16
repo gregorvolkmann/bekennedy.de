@@ -26,7 +26,6 @@ h4 {
 	background: #000 url(../img/bg.jpg) no-repeat scroll top center;
 	color: rgb(250, 245, 220);
 	margin: 0 auto;
-	/*padding-bottom: 50px;*/
 	min-height: 570px;
 	overflow: hidden;
 	position: relative;
@@ -137,121 +136,121 @@ h4 {
 	z-index: 10;
 }
 
-#videoframe {
+#videoframe, #answerframe{
 	display: none;
 	margin: 0 auto;
 	position: absolute;
 	top: 0;
 	height: 100%;
-/*	width: 0;*/
 }
 
 
 /******		Navigation		******/
 
-/*#navwrap {
+#navwrap {
 	bottom: 0px;
-	left: 0px;
-	padding-top: 50px;
-	position: absolute;
-}*/
-
-#nav {
-	background-color: rgb(250, 245, 220);
-	bottom: 0px;
-/*	font-family: AkzidenzGroteskLight, sans-serif;*/
-	left: 0px;
-	margin: 50px 0 0;
-	padding: 0;
 	position: fixed;
 	width: 100%;
 	z-index: 10;
+
 }
-	#nav li {
-		display: inline-block;
-		height: 30px;
-		list-style-type: none;
-		overflow: visible;
-		padding: 15px 0;
-		position: relative;
-		width: 50px;
+	#nav {
+		background-color: rgb(250, 245, 220);
+		bottom: 0px;
+		margin: 0;
+		padding: 0;
+		position: fixed;
+		width: 100%;
 	}
-		#nav .dot {
-			background-color: rgb(0, 0, 0);
-			background-color: rgba(0, 0, 0, 0.5);
-			border-radius: 5px;
-			box-shadow: rgba(0,0,0,0.07) 0px 7px 3px;
-			display: block;
-			height: 10px;
-			margin: 0px auto 10px;
-			width: 10px;
-		}
-			#nav li.active .dot, #nav li.active .nav-progress, #nav li a:hover .dot {
-				background-color: rgb(185, 80, 50);
-			}
-		#nav .nav-progressbg {
-			background-color: rgb(0, 0, 0);
-			background-color: rgba(0, 0, 0, 0.5);
-			box-shadow: rgba(0,0,0,0.2) 0 7px 4px;
-			height: 2px;
-			position: absolute;
-			top: 4px;
-			left: 50%;
-			width: 54px;
-			z-index: -1;
-		}
-		#nav .nav-progress {
-			background-color: rgb(185, 80, 50);
-			height: 2px;
-			position: absolute;
-			top: 4px;
-			left: 50%;
-			width: 0;
-			z-index: -1;
-		}
-		#nav .text {
-			margin-bottom: 10px;
-		}
-		
-	#nav #audio {
-		position: absolute;
-		right: 50px;
-	}
-		#nav #audio a {
-			background-image: url(../ico/audio.png);
-			height: 25px;
-			width: 25px;
-		}
-			#nav #audio a.muted {
-				background-position: 0 25px;
-			}
-		
-		#nav li a {
-			color: #000;
-			display: block;
-			height: 100%;
+		#nav li {
+			display: inline-block;
+			height: 30px;
+			list-style-type: none;
+			overflow: visible;
+			padding: 15px 0;
 			position: relative;
-			text-decoration: none;
-			width: 100%;
+			width: 50px;
 		}
-			#nav li a:hover:before {
-				background-color: rgb(255,255,255);
-				background-color: rgba(255, 255, 255, 0.5);
-				color: #FFF;
-				content: attr(title);
-				font-family: AkzidenzGroteskLight;
-				left: -35px;
-				padding: 5px 10px;
+			#nav .dot {
+				background-color: rgb(0, 0, 0);
+				background-color: rgba(0, 0, 0, 0.5);
+				border-radius: 5px;
+				box-shadow: rgba(0,0,0,0.07) 0px 7px 3px;
+				display: block;
+				height: 10px;
+				margin: 0px auto 10px;
+				position: relative;
+				width: 10px;
+				z-index: 10;
+			}
+				#nav li.active .dot, #nav li.active .nav-progress, #nav li a:hover .dot {
+					background-color: rgb(185, 80, 50);
+				}
+			#nav .nav-progressbg {
+				background-color: rgb(0, 0, 0);
+				background-color: rgba(0, 0, 0, 0.5);
+				box-shadow: rgba(0,0,0,0.2) 0 7px 4px;
+				height: 2px;
 				position: absolute;
-				text-align: center;
-				top: -43px;
-				width: 107px;
-				white-space: nowrap;
-				z-index: 5;
+				top: 4px;
+				left: 50%;
+				width: 54px;
+/*				z-index: ;*/
 			}
-			#nav li.nopopover a:hover:before {
-				content: none;
+			#nav .nav-progress {
+				background-color: rgb(185, 80, 50);
+				height: 2px;
+				position: absolute;
+				top: 4px;
+				left: 50%;
+				width: 0;
+				z-index: -1;
 			}
+			#nav .text {
+				margin-bottom: 10px;
+			}
+		
+		#nav #audio {
+			margin-top: 4px;
+			position: absolute;
+			right: 50px;
+			width: auto;
+		}
+			#nav #audio a {
+				background-image: url(../ico/audio.png);
+				height: 25px;
+				width: 25px;
+			}
+				#nav #audio a.muted {
+					background-position: 0 25px;
+				}
+		
+			#nav li a {
+				color: #000;
+				display: block;
+				height: 100%;
+				position: relative;
+				text-decoration: none;
+				width: 100%;
+			}
+				#nav li a:hover:before {
+					background-color: rgb(255,255,255);
+					background-color: rgba(255, 255, 255, 0.5);
+					color: #FFF;
+					content: attr(title);
+					font-family: AkzidenzGroteskLight;
+					left: -35px;
+					padding: 5px 10px;
+					position: absolute;
+					text-align: center;
+					top: -43px;
+					width: 107px;
+					white-space: nowrap;
+					z-index: 5;
+				}
+				#nav li.nopopover a:hover:before {
+					content: none;
+				}
 
 
 /******		Info Modal		******/
@@ -278,7 +277,7 @@ h4 {
 			#info-nav a {
 				height: 45px;
 				padding: 0;
-				margin: 10px;
+				margin: 10px 17px;
 				overflow: hidden;
 			}
 				#info-nav a:hover, #info-nav a.active {

@@ -16,11 +16,15 @@ TODO
 # info modal büroklammer
 # info modal image position
 
-video start card flip
-
 question modal
 
+nav hover handler
+
+video start card flip
+
 ambiente audio
+
+overlay management
 
 SONSTIGES
 body bg coins
@@ -54,7 +58,7 @@ nav element clicked border
 				<img id="envelope" src="img/envelope.jpg" />
 			</div>
 		</div>
-		<!-- <div id="navwrap"> -->
+		<div id="navwrap">
 			<ul id="nav">
 				<li>
 					<a href="#video1" title="Landung">
@@ -146,10 +150,13 @@ nav element clicked border
 					<a href="#audio" class="novideo nonav" onclick="toggleMute($(this))"></a>
 				</li>
 			</ul>
-		<!-- </div> -->
+		</div>
 		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="hideVideoframe(); resetNav()">×</button>
 		<video id="videoframe">
-			<source id="video" src="vid/video1.mp4" type="video/mp4">
+			<source id="storyvideo" src="vid/video1.mp4" type="video/mp4">
+		</video>
+		<video id="answerframe">
+			<source id="answervideo" type="video/mp4">
 		</video>
 		<div id="info-modal" class="modal hide fade" data-backdrop="false">
 			<div class="modal-header">
@@ -173,11 +180,17 @@ nav element clicked border
 		      <p>Bitte aktivieren Sie Javascript.</p>
 		    </div>
 		</div>
-		<div id="quiz-modal" class="modal hide fade">
+		<div id="quiz-modal" class="modal hide fade" data-backdrop="false">
 			<div class="modal-header">
 				<p id="question"></p>
 			</div>
-			<div class="modal-body"></div>
+			<div class="modal-body">
+				<form onsubmit="submitAnswer(); return false;">
+					<fieldset>
+						<input id="submitAnswer" type="submit" class="btn btn-link" value="&rarr;">
+					</fieldset>
+				</form>
+			</div>
 		</div>
 
 		<div id="social-buttons" >

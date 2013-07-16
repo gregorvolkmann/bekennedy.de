@@ -6,9 +6,6 @@ var barWidth = $('.nav-progressbg').first().width();
 // Video
 
 function centerVideoFrame() {
-	// setup videoframe
-	// $("#videoframe").height($(document).height() - $('#nav').height());
-	// center videoframe
 	$("#videoframe").css("margin-left", ($(document).width() - $("#videoframe").height() / h * w) / 2);
 }
 
@@ -38,7 +35,7 @@ function showVideoframe() {
 		$("#videoframe").show();
 		$("#video-closebutton").show();
 		
-		$("#navwrap").animate({bottom: -$("#nav").height()});
+		$("#nav").animate({bottom: -$("#nav").height()});
 	}
 }
 
@@ -49,7 +46,30 @@ function hideVideoframe() {
 		pauseVideo();
 		
 		$("#content > *").animate({opacity: 1});
-		$("#navwrap").animate({bottom: 0});
+		$("#nav").animate({bottom: 0});
+	}
+}
+
+function showAnswerframe() {
+	if($("#answerframe").is(':hidden')) {
+		$("#answerframe").show();
+		$("#video-closebutton").show();
+		
+		$("#nav").animate({bottom: -$("#nav").height()});
+	}
+}
+
+function submitAnswer() {
+	if($("input[name=answer]:radio:checked").val()) {
+		showAnswerframe();
+		$("#quiz-modal").modal("hide");
+		hideVideoframe();
+		
+		if($("#answerframe").get(0).paused) {
+			$("#answerframe").get(0).play();
+		}
+	} else {
+		alert("Bitte wählen Sie Ihren nächsten Schritt.");
 	}
 }
 
@@ -102,7 +122,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	// nav
 	// nav-progress handling
     $("#videoframe").bind("timeupdate", videoTimeUpdateHandler);
     function videoTimeUpdateHandler(e) {
@@ -113,7 +133,7 @@ $(document).ready(function() {
     function updateProgressWidth(percent) {
         $(".active").last().children().children(".nav-progress").width(percent * barWidth);
     }
-	
+
 	$("#nav li a, #postcardwrap a").click(function() {
 		if(!$(this).hasClass("novideo")) {
 			navigate($(this));
@@ -133,11 +153,17 @@ $(document).ready(function() {
 	});
 	
 	$("#videoframe").on("ended", function() {
-		$.get("quiz/question" + $("#videoframe").attr("src").substring(9, 10) + ".html", function(data){
+		var videoNumber = $("#videoframe").attr("src").substring(9, 10);
+		$.get("quiz/question" + videoNumber + ".html", function(data){
 			$("#quiz-modal .modal-header #question").html(data);
 		});
-		$.get("quiz/answers" + $("#videoframe").attr("src").substring(9, 10) + ".html", function(data){
-			$("#quiz-modal .modal-body").html(data);
+		$.get("quiz/answers" + videoNumber + ".html", function(data){
+			$("#quiz-modal #submitAnswer").before(data);
+			
+			$("input[name=answer]:radio").change(function() {
+				$("#answerframe").attr("src", "vid/video" + videoNumber + "/answer" + $(this).val() + ".mp4");
+				$("#answerframe")[0].load();
+			});
 		});
 		$("#quiz-modal").modal("show");
 	});
