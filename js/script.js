@@ -1,26 +1,62 @@
 /*
  *	TODO
  *
+ *	video7 is 720p
+ *
  *	seamless video transition
- *	answerFrame nav hover leave
- *	navclicked frame open -> nav hover leave
- *
  *	on page loaded auto resizing
- *
+ *	nav click -> quiz modal still visible
+ *	quiz 3 wasser next not weiter
+ *	quiz 8 nach antwort1 kein video?
+ *	auf dem hotelzimmer alle antworten führen weiter
+ *	
+ *	overlay management
+ *	
+ *	BUGS
+ *	
+ *	videoframe close -> nav hidden
+ *	video to video transition
+ *	
+ *	SONSTIGES
+ *	# body bg coins
+ *	# bodyhöhe anpassen
+ *	# nav progressbg seamless
+ *	social links
+ *	# nav element clicked border
+ *	
+ *	DELETED FEATURES
+ *	video start card flip
+ *	ambiente audio
+ *	
+ *	
+ *	
+ *	
  */ 
 
 var w = 4;
 var h = 3;
-var progressbarWidth = $('.nav-progressbg').first().width();
+var progressbarWidth;
 
-// Video
-function playVideo(v, $f) {
-	if(v != null) {
-		// load video
-		$f.attr("src", "vid/video" + v + ".mp4");
-		$f[0].load();
+
+//////////	Video	//////////
+
+function pauseVideo($f) {
+	if(!$f.get(0).paused) {
+		$f.get(0).pause();
 	}
-	
+}
+
+function toggleMute() {
+	$("#videoframe").prop('muted', !$("#videoframe").prop('muted'));
+	$("#answerframe").prop('muted', !$("#answerframe").prop('muted'));
+	$("#audio a").toggleClass("muted");
+}
+
+function playVideo(v, $f) {
+	// load video
+	$f.attr("src", "vid/video" + v + ".mp4");
+	$f[0].load();
+
 	showFrame($f);
 	
 	if($f.get(0).paused) {
@@ -28,9 +64,24 @@ function playVideo(v, $f) {
 	}
 }
 
-function pauseVideo($f) {
-	if($f && !$f.get(0).paused) {
-		$f.get(0).pause();
+function closeFrame($f) {
+	$("#videocurtain").fadeOut();
+	$("#quiz-modal, #answer-modal").modal("hide");
+	hideFrame($f);
+	$("#content > *").animate({opacity: 1});
+	deactivateNavHovering();
+}
+
+function hideFrame($f) {
+	if($f.is(':visible')) {
+		$f.prev().fadeOut();
+		$f.fadeOut();
+		
+		pauseVideo($f);
+		$("#content > *").animate({opacity: 1});
+		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
+			deactivateNavHovering();
+		}
 	}
 }
 
@@ -42,34 +93,16 @@ function showFrame($f, cb) {
 		
 		$f.fadeIn(1000, function() {
 			if(typeof cb !== 'undefined') {
-				console.log("callback");
 				cb();
 			}
 		});
 		$f.prev().fadeIn(1000);
-
+		$("#videocurtain").fadeIn(2000);
 	}
 }
 
-function hideFrame($f) {
-	if($f.is(':visible')) {
-		$f.prev().fadeOut();
-		$f.fadeOut();
-		
-		pauseVideo($f);
-		
-		$("#content > *").animate({opacity: 1});
-		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
-			deactivateNavHovering();
-		}
-	}
-}
 
-function closeFrame($f) {
-	$("#quiz-modal").modal("hide");
-	hideFrame($f);
-	pauseVideo($f);
-}
+//////////	Quiz Functions	//////////
 
 function showQuiz(vid) {
 	$.get("quiz/answers" + vid + ".html", function(data){
@@ -101,16 +134,19 @@ function submitAnswer() {
 	}
 }
 
-// Navigation
+
+//////////	Navigation	//////////
 
 function resetNav() {
-	$("#nav").children().removeClass("active");
-	$(".nav-progress").width(0);
+	if($("#videoframe, #answerframe").is(':hidden')) {
+		$("#nav").children().removeClass("active");
+		$(".nav-progress").width(0);
+	}
 }
 
-function navigate(vid) {
+function activateNav(vid) {
 	var $e;
-	if(vid == "info") {
+	if(vid == 10) {
 		$e = $("#nav a[href='#info-modal']");
 	} else {
 		$e = $("#nav a[href='#video" + vid + "']");
@@ -123,29 +159,21 @@ function navigate(vid) {
 	$e.parent().addClass("active");
 }
 
-function activateNavHovering() {
-	$("#nav").animate({opacity: 0});
-	$("#nav").hover(function() {
-		console.log("hover IN");
-		$("#nav").stop().animate({opacity: 1}, 1000);
-	}, function() {
-		console.log("hover OUT");
-		$("#nav").stop().animate({opacity: 0});
-	});
-}
-
 function deactivateNavHovering() {
 	$("#nav").off("mouseenter mouseleave");
 	$("#nav").stop().animate({opacity: 1});
 }
 
-function toggleMute() {
-	$("#videoframe").prop('muted', !$("#videoframe").prop('muted'));
-	$("#answerframe").prop('muted', !$("#answerframe").prop('muted'));
-	$("#audio a").toggleClass("muted");
+function activateNavHovering() {
+	$("#nav").animate({opacity: 0});
+	$("#nav").hover(function() {
+		$("#nav").stop().animate({opacity: 1}, 1000);
+	}, function() {
+		$("#nav").stop().animate({opacity: 0});
+	});
 }
 
-function IsDocumentAvailable(url) {
+function documentExists(url) {
     // XHR is supported by most browsers.
     // IE 9 supports it (maybe IE8 and earlier) off webserver
     // IE running pages off of disk disallows XHR unless security zones are set appropriately. Throws a security exception.
@@ -188,6 +216,7 @@ function IsDocumentAvailable(url) {
 
 $(document).ready(function() {
 	// init
+	progressbarWidth = $('.nav-progressbg').first().width();
 	$.get("info/ausstellung.html", function(data){
 		$("#info-modal .modal-body").html(data);
 	});
@@ -195,14 +224,11 @@ $(document).ready(function() {
 	//////////	Navigation	//////////
 	$("#nav li a, #postcardwrap a").click(function() {
 		if(!$(this).hasClass("novideo")) {
+			$("#info-modal, #quiz-modal").modal('hide');	
 			var vid = $(this).attr('href').substring(6);
-
-			navigate(vid);
+			activateNav(vid);
 			$("#content > *").animate({opacity: 0}, 1000, function() {
 				playVideo(vid, $("#videoframe"));
-				if($("#info-modal").is(':visible')) {
-					$("#info-modal").modal('hide');
-				}
 			});
 		}
 	});
@@ -225,6 +251,7 @@ $(document).ready(function() {
 			$("#content > *").fadeOut();
 			pauseVideo();
 		}
+		activateNav(10);
 	});
 	
 	$("#info-modal").on('hide', function() {
@@ -256,6 +283,7 @@ $(document).ready(function() {
 	//////////	Quiz Modal	//////////
 	$("#quiz-modal").on('show', function() {
 		deactivateNavHovering();
+		$(this).removeData("next");
 	});
 
 	$("#quiz-modal").on('hidden', function() {
@@ -267,30 +295,28 @@ $(document).ready(function() {
 
 	//////////	Video	//////////
     $("#videoframe").bind("timeupdate", videoTimeUpdateHandler);
+    function updateProgressWidth(percent) {
+        $("#nav li.active").last().children().children(".nav-progress").width(percent * progressbarWidth);
+    }
     function videoTimeUpdateHandler(e) {
         var video = $("#videoframe").get(0);
         var percent = video.currentTime / video.duration;
         updateProgressWidth(percent);
     }
-    function updateProgressWidth(percent) {
-        $("#nav li.active").last().children().children(".nav-progress").width(percent * progressbarWidth);
-    }
 	
 	$("#videoframe").on("ended", function() {
 		var vid = Number($("#videoframe").attr("src").substring(9, 10));
 		
-		if(IsDocumentAvailable("quiz/question" + vid + ".html")) {
-	        //file exists
-			console.log("question" + vid + " exists, show question");
+		if(documentExists("quiz/question" + vid + ".html")) {
+	        // question exists
 			$.get("quiz/question" + vid + ".html", function(data) {
 				$("#quiz-modal .modal-header #question").html(data);
 			});
 			showQuiz(vid);
 	    } else {
-	        //file not exists
-			console.log("no question, next vid");
+	        // no question
 			$(this).data("vid", vid + 1);
-			navigate(vid + 1);
+			activateNav(vid + 1);
 			playVideo(vid + 1, $("#videoframe"));
 	    }
 	});
@@ -298,15 +324,21 @@ $(document).ready(function() {
 	$("#answerframe").on("ended", function() {
 		var vid = Number($(this).data("vid"));
 		if($(this).data("next") == true) {
-			console.log("Play video" + ($(this).data("vid") + 1) + ".");
-			navigate(vid + 1);
-			playVideo(vid + 1, $("#videoframe"));
-			$("#answerframe").fadeOut();
-			if($("#info-modal").is(':visible')) {
-				$("#info-modal").modal('hide');
+			if(documentExists("vid/video" + (vid+1) + ".mp4")) {
+				// next video
+				activateNav(vid + 1);
+				playVideo(vid + 1, $("#videoframe"));
+				$("#answerframe").fadeOut();
+				if($("#info-modal").is(':visible')) {
+					$("#info-modal").modal('hide');
+				}
+			} else {
+				// finish
+				closeFrame($("#videoframe, #answerframe"));
+				$("#info-modal").modal('show');
 			}
 		} else {
-			console.log("Play NOT video" + vid);
+			// wrong answer
 			showFrame($("#videoframe"), function() {
 				hideFrame($("#answerframe"));
 			});

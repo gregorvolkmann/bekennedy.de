@@ -188,6 +188,19 @@ a, a:hover, a:active, a:focus {
 	right: 20px;
 	z-index: 10;
 }
+	.frameCloseButton:hover {
+		color: rgb(250, 245, 220);
+	}
+
+#videocurtain {
+	background-color: #000;
+	display: none;
+	height: 100%;
+	left: 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
 
 #videoframe, #answerframe{
 	display: none;

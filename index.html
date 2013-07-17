@@ -1,32 +1,3 @@
-<!-- 
-
-TODO
-
-nav click -> quiz modal still visible
-quiz 3 wasser next not weiter
-auf dem hotelzimmer alle antworten führen weiter
-quiz 8 nach antwort1 kein video?
-
-overlay management
-
-BUGS
-
-# nav hover
-videoframe close -> nav hidden
-video to video transition
-
-SONSTIGES
-# body bg coins
-# bodyhöhe anpassen
-# nav progressbg seamless
-social links
-# nav element clicked border
-
-DELETED FEATURES
-video start card flip
-ambiente audio
-
- -->
 <!DOCTYPE html>
 <html>
 	<head>
@@ -57,99 +28,98 @@ ambiente audio
 				<img id="bueroklammer3" src="img/bueroklammer3.png" />
 			</div>
 		</div>
-		<!-- <div id="navwrap"> -->
-			<ul id="nav">
-				<li>
-					<a href="#video1" title="Landung">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">18:20</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video2" title="Im Hotel">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">18:25</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video3" title="Treffen mit Erhard">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">18:30</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video4" title="Fahrt zum Kurhaus">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">19:00</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video5" title="Vor dem Kurhaus">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">19:40</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video6" title="Im Kurhaus">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">19:45</span>
-					</a>
-				</li>
-				<!-- <li>
-					<a href="#video7" title="Vor dem Hotel">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">20:20</span>
-					</a>
-				</li> -->
-				<li>
-					<a href="#video7" title="Auf dem Hotelzimmer">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">20:25</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video8" title="Fr&uuml;hst&uuml;ck">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">07:00</span>
-					</a>
-				</li>
-				<li>
-					<a href="#video9" title="Abflug">
-						<span class="dot"></span>
-						<span class="nav-progressbg"></span>
-						<span class="nav-progress"></span>
-						<span class="text">08:05</span>
-					</a>
-				</li>
-				<li class="nopopover">
-					<a href="#info-modal" class="novideo" onclick="navigate('info')" data-toggle="modal">
-						<span class="dot"></span>
-						<span class="text">Infos</span>
-					</a>
-				</li>
-				<li id="audio" class="nopopover">
-					<a href="#mute" class="novideo nonav" onclick="toggleMute()"></a>
-				</li>
-			</ul>
-		<!-- </div> -->
+		<ul id="nav">
+			<li>
+				<a href="#video1" title="Landung">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">18:20</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video2" title="Im Hotel">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">18:25</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video3" title="Treffen mit Erhard">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">18:30</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video4" title="Fahrt zum Kurhaus">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">19:00</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video5" title="Vor dem Kurhaus">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">19:40</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video6" title="Im Kurhaus">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">19:45</span>
+				</a>
+			</li>
+			<!-- <li>
+				<a href="#video7" title="Vor dem Hotel">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">20:20</span>
+				</a>
+			</li> -->
+			<li>
+				<a href="#video7" title="Auf dem Hotelzimmer">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">20:25</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video8" title="Fr&uuml;hst&uuml;ck">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">07:00</span>
+				</a>
+			</li>
+			<li>
+				<a href="#video9" title="Abflug">
+					<span class="dot"></span>
+					<span class="nav-progressbg"></span>
+					<span class="nav-progress"></span>
+					<span class="text">08:05</span>
+				</a>
+			</li>
+			<li class="nopopover">
+				<a href="#info-modal" class="novideo" data-toggle="modal">
+					<span class="dot"></span>
+					<span class="text">Infos</span>
+				</a>
+			</li>
+			<li id="audio" class="nopopover">
+				<a href="#mute" class="novideo nonav" onclick="toggleMute()"></a>
+			</li>
+		</ul>
+		<div id="videocurtain"></div>
 		<button id="video-closebutton" type="button" class="close closeButton frameCloseButton" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="videoframe">
 			<source id="storyvideo" src="vid/video1.mp4" type="video/mp4">
