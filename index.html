@@ -1,4 +1,5 @@
 <!-- 
+
 TODO
 
 # audio button
@@ -20,17 +21,30 @@ TODO
 
 # nav hover handler
 
-video start card flip
-
-ambiente audio
+nav click -> quiz modal still visible
+quiz 3 wasser next not weiter
+auf dem hotelzimmer alle antworten führen weiter
+quiz 8 nach antwort1 kein video?
 
 overlay management
+
+BUGS
+
+nav hover
+videoframe close -> nav hidden
+video to video transition
 
 SONSTIGES
 # body bg coins
 # bodyhöhe anpassen
 # nav progressbg seamless
+social links
 nav element clicked border
+
+DELETED:
+
+video start card flip
+ambiente audio
 
  -->
 <!DOCTYPE html>
@@ -51,9 +65,9 @@ nav element clicked border
 			<img id="muenze" src="img/muenze.png" />
 			<img id="muenze2" src="img/muenze2.png" />
 			<div id="postcardwrap">
-				<a href="#video1" title="Be Kennedy">
+				<a href="#video0" title="Be Kennedy">
 					<img id="postcard" src="img/postcard.png" />
-					<div id="playbutton">
+					<div id="playButton">
 							<img src="ico/play.png" />
 					</div>
 				</a>
@@ -61,7 +75,7 @@ nav element clicked border
 				<img id="bueroklammer3" src="img/bueroklammer3.png" />
 			</div>
 		</div>
-		<div id="navwrap">
+		<!-- <div id="navwrap"> -->
 			<ul id="nav">
 				<li>
 					<a href="#video1" title="Landung">
@@ -150,21 +164,33 @@ nav element clicked border
 					</a>
 				</li>
 				<li id="audio" class="nopopover">
-					<a href="#audio" class="novideo nonav" onclick="toggleMute()"></a>
+					<a href="#mute" class="novideo nonav" onclick="toggleMute()"></a>
 				</li>
 			</ul>
-		</div>
-		<button id="video-closebutton" type="button" class="close" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
+		<!-- </div> -->
+		<button id="video-closebutton" type="button" class="close closeButton frameCloseButton" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="videoframe">
 			<source id="storyvideo" src="vid/video1.mp4" type="video/mp4">
 		</video>
-		<button id="answer-closebutton" type="button" class="close" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
+		<button id="answer-closebutton" type="button" class="close closeButton frameCloseButton" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="answerframe">
 			<source id="answervideo" type="video/mp4">
 		</video>
+		<div id="quiz-modal" class="modal hide fade" data-backdrop="false">
+			<div class="modal-header">
+				<p id="question"></p>
+			</div>
+			<div class="modal-body">
+				<form onsubmit="submitAnswer(); return false">
+					<fieldset>
+						<input id="answerButton" type="submit" class="btn btn-link" value="&#9658;">
+					</fieldset>
+				</form>
+			</div>
+		</div>
 		<div id="info-modal" class="modal hide fade" data-backdrop="false">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<button id="infoCloseButton" type="button" class="close closeButton" data-dismiss="modal" aria-hidden="true">×</button>
 				<ul id="info-nav" class="nav nav-pills">
 					<li>
 						<a id="info-ausstellung" class="active" href="#info-ausstellung"></a>
@@ -183,18 +209,6 @@ nav element clicked border
 		    <div class="modal-body">
 		      <p>Bitte aktivieren Sie Javascript.</p>
 		    </div>
-		</div>
-		<div id="quiz-modal" class="modal hide fade" data-backdrop="false">
-			<div class="modal-header">
-				<p id="question"></p>
-			</div>
-			<div class="modal-body">
-				<form onsubmit="submitAnswer(); return false">
-					<fieldset>
-						<input id="answerButton" type="submit" class="btn btn-link" value="&#9658;">
-					</fieldset>
-				</form>
-			</div>
 		</div>
 
 		<div id="social-buttons" >

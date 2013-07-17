@@ -1,6 +1,19 @@
-// var $video = $("#videoframe");
+/*
+ *	TODO
+ *
+ *	audio toggle
+ *	seamless video transition
+ *	nav hover flickering
+ *	answerFrame nav hover leave
+ *	navclicked frame open -> nav hover leave
+ *
+ *	on page loaded auto resizing
+ *
+ */ 
+
 var w = 4;
 var h = 3;
+var navTimer;
 var progressbarWidth = $('.nav-progressbg').first().width();
 
 // Video
@@ -24,27 +37,36 @@ function pauseVideo($f) {
 	}
 }
 
-function showFrame($f) {
+function showFrame($f, cb) {
 	if($f.is(':hidden')) {
 		$f.css("margin-left", ($(document).width() - $f.height() / h * w) / 2);
 		
-		$f.show();
-		$f.prev().show();
+		$f.fadeIn(1000, function() {
+			if(typeof cb !== 'undefined') {
+				console.log("callback");
+				cb();
+			}
+		});
+		$f.prev().fadeIn(1000);
 		
 		$("#nav").animate({bottom: -$("#nav").height()});
+		$("#navwrap").on("mouseenter", enterNavHandler);
+		$("#navwrap").on("mouseleave", leaveNavHandler);
 	}
 }
 
 function hideFrame($f) {
 	if($f.is(':visible')) {
-		$f.prev().hide();
-		$f.hide();
+		$f.prev().fadeOut();
+		$f.fadeOut();
 		
-		pauseVideo();
+		pauseVideo($f);
 		
 		$("#content > *").animate({opacity: 1});
 		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
+		    clearTimeout(navTimer);
 			$("#nav").animate({bottom: 0});
+			$("#navwrap").off("mouseenter mouseleave");
 		}
 	}
 }
@@ -64,16 +86,18 @@ function showQuiz(vid) {
 			$("#answerframe")[0].load();
 		});
 	});
+	$("#quiz-modal").data("vid", vid);
 	$("#quiz-modal").modal("show");
 }
 
 function submitAnswer() {
 	if($("input[name=answer]:radio:checked").val()) {
-		$("#answerframe").data("next", $("input[name=answer]:radio:checked").data("next"));
-		$("#answerframe").data("vid", $("input[name=answer]:radio:checked").val());
-		showFrame($("#answerframe"));
+		$("#answerframe").data("next", $("#quiz-modal input[name=answer]:radio:checked").data("next"));
+		$("#answerframe").data("vid", $("#quiz-modal").data("vid"));
+		showFrame($("#answerframe"), function() {
+			hideFrame($("#videoframe"));
+		});
 		$("#quiz-modal").modal("hide");
-		hideFrame($("#videoframe"));
 		
 		if($("#answerframe").get(0).paused) {
 			$("#answerframe").get(0).play();
@@ -102,10 +126,60 @@ function navigate(vid) {
 
 function toggleMute() {
 	$("#videoframe").prop('muted', !$("#videoframe").prop('muted'));
-	$("#answerframe").prop('muted', !$("#videoframe").prop('muted'));
+	$("#answerframe").prop('muted', !$("#answerframe").prop('muted'));
 	$("#audio a").toggleClass("muted");
 }
 
+function enterNavHandler() {
+    clearTimeout(navTimer);
+	$("#nav").stop().animate({bottom: 0});
+}
+function leaveNavHandler() {
+    navTimer = setTimeout(function() {
+	$("#nav").stop().animate({bottom: -$("#nav").height()});
+    }, 1000);
+}
+
+function IsDocumentAvailable(url) {
+    // XHR is supported by most browsers.
+    // IE 9 supports it (maybe IE8 and earlier) off webserver
+    // IE running pages off of disk disallows XHR unless security zones are set appropriately. Throws a security exception.
+    // Workaround is to use old ActiveX control on IE (especially for older versions of IE that don't support XHR)
+    // FireFox 4 supports XHR (and likely v3 as well) on web and from local disk
+    // Works on Chrome, but Chrome doesn't seem to allow XHR from local disk. (Throws a security exception) No workaround known.
+    var fSuccess = false;
+    var client = null;
+	
+    try {
+        client = new XMLHttpRequest();
+        client.open("GET", url, false);
+        client.send();
+    } catch(err) {
+        client = null;
+    }
+
+    // Try the ActiveX control if available
+    if(client === null) {
+        try {
+            client = new ActiveXObject("Microsoft.XMLHTTP");
+            client.open("GET", url, false);
+            client.send();
+        } catch(err) {
+            // Giving up, nothing we can do
+            client = null;
+        }
+    }
+	
+	// check 404
+	var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    var client404 = http.status!=404;
+	
+    fSuccess = Boolean(client && client.responseText && client404);
+
+    return fSuccess;
+}
 
 $(document).ready(function() {
 	// init
@@ -114,26 +188,25 @@ $(document).ready(function() {
 	});
 
 	//////////	Navigation	//////////
+	$("#navwrap").hover(enterNavHandler, leaveNavHandler);
+	$("#navwrap").off("mouseenter mouseleave");
+    clearTimeout(navTimer);
+	
 	$("#nav li a, #postcardwrap a").click(function() {
 		if(!$(this).hasClass("novideo")) {
 			var vid = $(this).attr('href').substring(6);
+
 			navigate(vid);
-			playVideo(vid, $("#videoframe"));
-			if($("#info-modal").is(':visible')) {
-				$("#info-modal").modal('hide');
-			}
+			$("#navwrap").on("mouseenter", enterNavHandler);
+			$("#navwrap").on("mouseleave", leaveNavHandler);
+			$("#content > *").animate({opacity: 0}, 1000, function() {
+				playVideo(vid, $("#videoframe"));
+				if($("#info-modal").is(':visible')) {
+					$("#info-modal").modal('hide');
+				}
+			});
 		}
 	});
-		$("#navwrap, #nav").hover(function() {
-		    clearTimeout($("#nav").data('timeout'));
-			$("#nav").animate({bottom: 0});
-		}, function() {
-		    var t = setTimeout(function() {
-			$("#nav").animate({bottom: -$("#nav").height()});
-		    }, 2000);
-		    $("#nav").data('timeout', t);
-		});
-		$("#navwrap, #nav").off("mouseenter mouseleave");
 
 	//////////	Info Modal	//////////
 	$("#info-nav a").click(function() {
@@ -145,15 +218,29 @@ $(document).ready(function() {
 	});
 
 	$("#info-modal").on('show', function() {
-		$("#content > *").animate({opacity: 0});
-		pauseVideo();
+		if($("#quiz-modal").is(':visible')) {
+			// remind previous window
+			$(this).data("switcher", "#quiz-modal");
+			$("#quiz-modal").hide();
+		} else {
+			$("#content > *").fadeOut();
+			pauseVideo();
+		}
 	});
 	
 	$("#info-modal").on('hide', function() {
-		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
-			resetNav();
+		if($(this).data("switcher")) {
+			$($(this).data("switcher")).show();
+			$(this).removeData("switcher");
 		} else {
-			// activate video nav element
+			$("#content > *").fadeIn();
+			if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
+				resetNav();
+			} else {
+				if($("#videoframe").get(0).paused) {
+					$("#videoframe").get(0).play();
+				}
+			}
 		}
 	});
 
@@ -169,14 +256,16 @@ $(document).ready(function() {
 
 	//////////	Quiz Modal	//////////
 	$("#quiz-modal").on('show', function() {
+	    clearTimeout(navTimer);
 		$("#nav").animate({bottom: 0});
-		$("#navwrap, #nav").off("mouseenter mouseleave");
+		$("#navwrap").off("mouseenter mouseleave");
 	});
-	
 
 	$("#quiz-modal").on('hidden', function() {
 		$("#quiz-modal .modal-body fieldset label").remove();
 		$("#quiz-modal #question p").remove();
+		$("#navwrap").on("mouseenter", enterNavHandler);
+		$("#navwrap").on("mouseleave", leaveNavHandler);
 	});
 	
 
@@ -188,30 +277,43 @@ $(document).ready(function() {
         updateProgressWidth(percent);
     }
     function updateProgressWidth(percent) {
-        $(".active").last().children().children(".nav-progress").width(percent * progressbarWidth);
+        $("#nav li.active").last().children().children(".nav-progress").width(percent * progressbarWidth);
     }
 	
 	$("#videoframe").on("ended", function() {
-		var vid = $("#videoframe").attr("src").substring(9, 10);
-		$.get("quiz/question" + vid + ".html", function(data) {
-			$("#quiz-modal .modal-header #question").html(data);
-		});
-		showQuiz(vid);
+		var vid = Number($("#videoframe").attr("src").substring(9, 10));
+		
+		if(IsDocumentAvailable("quiz/question" + vid + ".html")) {
+	        //file exists
+			console.log("question" + vid + " exists, show question");
+			$.get("quiz/question" + vid + ".html", function(data) {
+				$("#quiz-modal .modal-header #question").html(data);
+			});
+			showQuiz(vid);
+	    } else {
+	        //file not exists
+			console.log("no question, next vid");
+			$(this).data("vid", vid + 1);
+			navigate(vid + 1);
+			playVideo(vid + 1, $("#videoframe"));
+	    }
 	});
 	
 	$("#answerframe").on("ended", function() {
-		var vid = $(this).data("vid");
-		if($(this).data("next")) {
+		var vid = Number($(this).data("vid"));
+		if($(this).data("next") == true) {
 			console.log("Play video" + ($(this).data("vid") + 1) + ".");
 			navigate(vid + 1);
-			playVideo(vid, $("#videoframe"));
+			playVideo(vid + 1, $("#videoframe"));
+			$("#answerframe").fadeOut();
 			if($("#info-modal").is(':visible')) {
 				$("#info-modal").modal('hide');
 			}
 		} else {
 			console.log("Play NOT video" + vid);
-			showFrame($("#videoframe"));
-			hideFrame($("#answerframe"));
+			showFrame($("#videoframe"), function() {
+				hideFrame($("#answerframe"));
+			});
 			$("input[name=answer]:radio").removeAttr("checked");
 			showQuiz(vid);
 		}

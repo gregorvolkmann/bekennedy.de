@@ -42,8 +42,7 @@ h4 {
 	border-bottom: 1px solid;
 	color: rgb(255, 255, 255);
 	margin: 0 auto;
-	margin-top:1%;
-	padding: 10px;
+	padding: 2% 10px 10px;
 	font-size: 100%;
 	font-weight: 300;
 	font-family: AkzidenzGrotesk, sans-serif;
@@ -118,7 +117,7 @@ h4 {
 	#postcard {
 		width: 100%;
 	}
-	#playbutton {
+	#playButton {
 		background-color: rgb(255,255,255);
 		background-color: rgba(255,255,255, 0.5);
 		border-radius: 35px;
@@ -131,18 +130,18 @@ h4 {
 		top: 50%;
 		width: 60px;
 	}
-	a:hover #playbutton {
+	a:hover #playButton {
 		background-color: rgb(255,255,255);
 		background-color: rgba(255,255,255, 0.9);
 /*		box-shadow: none;*/
 	}
-	a:active #playbutton {
+	a:active #playButton {
 		background-color: rgb(255,255,255);
 		background-color: rgba(255,255,255, 1);
 		box-shadow: none;
-		top: 137px;
+		margin-top: -27px;
 	}
-		#playbutton img {
+		#playButton img {
 			height: 40px;
 			margin: 10px 9px 10px 11px;
 			width: 40px;
@@ -163,17 +162,26 @@ h4 {
 
 /******		Video		******/
 
-#video-closebutton, #answer-closebutton {
+.closeButton {
+	font-size: 150%;
+	font-weight: normal;
+/*	line-height: 30px;*/
+	opacity: .5;
+	-moz-opacity: .5;
+	filter:alpha(opacity=0.5);
+}
+	.closeButton:hover {
+		opacity: 1;
+		-moz-opacity: 1;
+		filter:alpha(opacity=1);
+	}
+.frameCloseButton {
+	color: rgb(250, 245, 220);
 	display: none;
-	font-size: 200%;
-	line-height: 30px;
-	text-shadow: #FFF 0 0 2px;
+	text-shadow: #000 0 0 2px;
 	position: fixed;
-	top: 6px;
-	right: 16px;
-	opacity: .8;
-	-moz-opacity: .8;
-		filter:alpha(opacity=0.8);
+	top: 18px;
+	right: 20px;
 	z-index: 10;
 }
 
@@ -183,6 +191,9 @@ h4 {
 	position: fixed;
 	top: 0;
 	height: 100%;
+}
+#videoframe {
+	background-color: #000;
 }
 
 
@@ -237,7 +248,6 @@ h4 {
 				top: 4px;
 				left: 50%;
 				width: 54px;
-/*				z-index: ;*/
 			}
 			#nav .nav-progress {
 				background-color: rgb(185, 80, 50);
@@ -246,7 +256,6 @@ h4 {
 				top: 4px;
 				left: 50%;
 				width: 0;
-/*				z-index: -1;*/
 			}
 			#nav .text {
 				margin-bottom: 10px;
@@ -255,7 +264,7 @@ h4 {
 		#nav #audio {
 			margin-top: 4px;
 			position: absolute;
-			right: 50px;
+			right: 40px;
 			width: auto;
 		}
 			#nav #audio a {
@@ -275,22 +284,25 @@ h4 {
 				text-decoration: none;
 				width: 100%;
 			}
-				#nav li a:hover:before {
-					background-color: rgb(255,255,255);
-					background-color: rgba(255, 255, 255, 0.5);
-					color: #FFF;
-					content: attr(title);
-					font-family: AkzidenzGroteskLight;
-					left: -35px;
-					padding: 5px 10px;
-					position: absolute;
-					text-align: center;
-					top: -45px;
-					width: 107px;
-					white-space: nowrap;
-					z-index: 5;
+				#nav li a:before {
+					opacity: 0;
 				}
-				#nav li.nopopover a:hover:before {
+					#nav li a:hover:before {
+						background-color: #999;
+						color: #FFF;
+						content: attr(title);
+						font-family: AkzidenzGroteskLight;
+						left: -35px;
+						padding: 5px 10px;
+						position: absolute;
+						text-align: center;
+						top: -45px;
+						opacity: 1;
+						width: 107px;
+						white-space: nowrap;
+						z-index: 5;
+					}
+				#nav li.nopopover a:before {
 					content: none;
 				}
 
@@ -311,15 +323,20 @@ h4 {
 }
 	#info-modal .modal-header {
 		border: none;
-		padding: 25px 25px 10px;
+		padding: 16px 25px 19px;
 	}
+		#info-modal #infoCloseButton {
+			position: absolute;
+			right: 20px;
+			top: 18px;
+		}
 		#info-nav {
 			margin: 0;
 		}
 			#info-nav a {
 				height: 45px;
 				padding: 0;
-				margin: 10px 17px;
+				margin: 10px 21px;
 				overflow: hidden;
 			}
 				#info-nav a:hover, #info-nav a.active {
@@ -364,36 +381,51 @@ h4 {
 		}
 
 
-/******		Info Modal		******/
+/******		Quiz Modal		******/
 #quiz-modal {
 	background: transparent url(../img/postcard-back.png) no-repeat scroll top left;
 	border: none;
 	box-shadow: none;
 	height: 355px;
 	text-align: left;
+	top: 50%;
+	margin-top: -150px;
 }
 	#quiz-modal .modal-header {
 		border: none;
-		font-family: 5px AkzidenzGroteskBold, sans-serif;
+		font-family: AkzidenzGroteskRegular, sans-serif;
+		font-size: 13,3px;
 		padding: 65px 155px 10px 40px;
 	}
 	#quiz-modal .modal-body {
 /*		height: 100%;*/
+		position: static;
 		overflow: visible;
 	}
 	#quiz-modal .modal-body form {
 		padding: 0 25px 25px;
 	}
-	#quiz-modal .modal-body form .btn-link{
+	#quiz-modal #answerButton {
 		position: absolute;
-		bottom: -30px;
-		right: 40px;
+		bottom: 30px;
+		right: 30px;
+		font-size: 30px;
+		color: #d44f2d;
 	}
-	
+		#quiz-modal #answerButton:hover {
+			color: #000;
+			text-decoration: none;
+		}
 	
 #social-buttons {
 	position:fixed;
-	right: 50px;
-	top: 14px;
+	right: 45px;
+	top: 20px;
 	width: 70px;
 }
+	#social-buttons a {
+		opacity: 0.5;
+	}
+	#social-buttons a:hover {
+		opacity: 1;
+	}
