@@ -1,9 +1,7 @@
 /*
  *	TODO
  *
- *	audio toggle
  *	seamless video transition
- *	nav hover flickering
  *	answerFrame nav hover leave
  *	navclicked frame open -> nav hover leave
  *
@@ -13,7 +11,6 @@
 
 var w = 4;
 var h = 3;
-var navTimer;
 var progressbarWidth = $('.nav-progressbg').first().width();
 
 // Video
@@ -39,6 +36,8 @@ function pauseVideo($f) {
 
 function showFrame($f, cb) {
 	if($f.is(':hidden')) {
+		activateNavHovering();
+		
 		$f.css("margin-left", ($(document).width() - $f.height() / h * w) / 2);
 		
 		$f.fadeIn(1000, function() {
@@ -48,10 +47,7 @@ function showFrame($f, cb) {
 			}
 		});
 		$f.prev().fadeIn(1000);
-		
-		$("#nav").animate({bottom: -$("#nav").height()});
-		$("#navwrap").on("mouseenter", enterNavHandler);
-		$("#navwrap").on("mouseleave", leaveNavHandler);
+
 	}
 }
 
@@ -64,9 +60,7 @@ function hideFrame($f) {
 		
 		$("#content > *").animate({opacity: 1});
 		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
-		    clearTimeout(navTimer);
-			$("#nav").animate({bottom: 0});
-			$("#navwrap").off("mouseenter mouseleave");
+			deactivateNavHovering();
 		}
 	}
 }
@@ -115,29 +109,40 @@ function resetNav() {
 }
 
 function navigate(vid) {
-	var $e = $("#nav a[href='#video" + vid + "']");
+	var $e;
+	if(vid == "info") {
+		$e = $("#nav a[href='#info-modal']");
+	} else {
+		$e = $("#nav a[href='#video" + vid + "']");
+		$e.children(".nav-progress").width(0);
+	}
 	$e.parent().prevAll().addClass("active");
 	$e.parent().prevAll().children().children(".nav-progress").width(progressbarWidth);
 	$e.parent().nextAll().removeClass("active");
 	$e.parent().nextAll().children().children(".nav-progress").width(0);
 	$e.parent().addClass("active");
-	$e.children(".nav-progress").width(0);
+}
+
+function activateNavHovering() {
+	$("#nav").animate({opacity: 0});
+	$("#nav").hover(function() {
+		console.log("hover IN");
+		$("#nav").stop().animate({opacity: 1}, 1000);
+	}, function() {
+		console.log("hover OUT");
+		$("#nav").stop().animate({opacity: 0});
+	});
+}
+
+function deactivateNavHovering() {
+	$("#nav").off("mouseenter mouseleave");
+	$("#nav").stop().animate({opacity: 1});
 }
 
 function toggleMute() {
 	$("#videoframe").prop('muted', !$("#videoframe").prop('muted'));
 	$("#answerframe").prop('muted', !$("#answerframe").prop('muted'));
 	$("#audio a").toggleClass("muted");
-}
-
-function enterNavHandler() {
-    clearTimeout(navTimer);
-	$("#nav").stop().animate({bottom: 0});
-}
-function leaveNavHandler() {
-    navTimer = setTimeout(function() {
-	$("#nav").stop().animate({bottom: -$("#nav").height()});
-    }, 1000);
 }
 
 function IsDocumentAvailable(url) {
@@ -188,17 +193,11 @@ $(document).ready(function() {
 	});
 
 	//////////	Navigation	//////////
-	$("#navwrap").hover(enterNavHandler, leaveNavHandler);
-	$("#navwrap").off("mouseenter mouseleave");
-    clearTimeout(navTimer);
-	
 	$("#nav li a, #postcardwrap a").click(function() {
 		if(!$(this).hasClass("novideo")) {
 			var vid = $(this).attr('href').substring(6);
 
 			navigate(vid);
-			$("#navwrap").on("mouseenter", enterNavHandler);
-			$("#navwrap").on("mouseleave", leaveNavHandler);
 			$("#content > *").animate({opacity: 0}, 1000, function() {
 				playVideo(vid, $("#videoframe"));
 				if($("#info-modal").is(':visible')) {
@@ -256,16 +255,13 @@ $(document).ready(function() {
 
 	//////////	Quiz Modal	//////////
 	$("#quiz-modal").on('show', function() {
-	    clearTimeout(navTimer);
-		$("#nav").animate({bottom: 0});
-		$("#navwrap").off("mouseenter mouseleave");
+		deactivateNavHovering();
 	});
 
 	$("#quiz-modal").on('hidden', function() {
 		$("#quiz-modal .modal-body fieldset label").remove();
 		$("#quiz-modal #question p").remove();
-		$("#navwrap").on("mouseenter", enterNavHandler);
-		$("#navwrap").on("mouseleave", leaveNavHandler);
+		activateNavHovering();
 	});
 	
 
