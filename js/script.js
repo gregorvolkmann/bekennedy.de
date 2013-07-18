@@ -30,9 +30,9 @@ var progressbarWidth;
 //////////	Video	//////////
 
 function pauseVideo($f) {
-	if(!$f.get(0).paused) {
+	// if(!$f.get(0).paused) {
 		$f.get(0).pause();
-	}	
+	// }	
 }
 
 function toggleMute() {
@@ -68,9 +68,6 @@ function hideFrame($f) {
 		
 		pauseVideo($f);
 		$("#content > *").animate({opacity: 1});
-		if($("#videoframe").is(':hidden') && $("#answerframe").is(':hidden')) {
-			deactivateNavHovering();
-		}
 	}
 }
 
@@ -119,6 +116,7 @@ function submitAnswer() {
 			hideFrame($("#videoframe"));
 		});
 		$("#quiz-modal").modal("hide");
+		activateNavHovering();
 		
 		if($("#answerframe").get(0).paused) {
 			$("#answerframe").get(0).play();
@@ -243,7 +241,8 @@ $(document).ready(function() {
 			$("#quiz-modal").hide();
 		} else {
 			$("#content > *").fadeOut();
-			pauseVideo();
+			pauseVideo($("#videoframe"));
+			pauseVideo($("#answerframe"));
 		}
 		activateNav(10);
 	});
@@ -283,7 +282,6 @@ $(document).ready(function() {
 	$("#quiz-modal").on('hidden', function() {
 		$("#quiz-modal .modal-body fieldset label").remove();
 		$("#quiz-modal #question p").remove();
-		activateNavHovering();
 	});
 	
 
