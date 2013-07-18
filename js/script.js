@@ -57,6 +57,7 @@ function playVideo(v, $f) {
 function closeFrame($f) {
 	$("#videocurtain").fadeOut();
 	$("#quiz-modal, #answer-modal").modal("hide");
+	$f.removeData("vid");
 	hideFrame($f);
 	$("#content > *").animate({opacity: 1});
 	deactivateNavHovering();
@@ -253,8 +254,8 @@ $(document).ready(function() {
 		if($(this).data("switcher")) {
 			$($(this).data("switcher")).show();
 			$(this).removeData("switcher");
+			$("#nav li.active").last().children().children(".nav-progress").width(progressbarWidth);
 		} else {
-			activateNav($("#videoframe").data("vid"));
 			$("#content > *").fadeIn();
 			
 			if($("#answerframe").is(':visible')) {
@@ -268,6 +269,7 @@ $(document).ready(function() {
 				resetNav();
 			}
 		}
+		activateNav($("#videoframe").data("vid"));
 	});
 
 	//////////	Quiz Modal	//////////
