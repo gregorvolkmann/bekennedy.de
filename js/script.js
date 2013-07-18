@@ -109,11 +109,12 @@ function showQuiz(vid) {
 	});
 	$("#quiz-modal").data("vid", vid);
 	$("#quiz-modal").modal("show");
+	deactivateNavHovering();
 }
 
 function submitAnswer() {
 	if($("input[name='answer']:radio:checked").val()) {
-		$("#answerframe").data("vid", $("#quiz-modal").data("vid"));
+		$("#videoframe").data("vid", $("#quiz-modal").data("vid"));
 		showFrame($("#answerframe"), function() {
 			hideFrame($("#videoframe"));
 		});
@@ -314,7 +315,7 @@ $(document).ready(function() {
 	});
 	
 	$("#answerframe").on("ended", function() {
-		var vid = Number($(this).data("vid"));
+		var vid = $("#videoframe").data("vid");
 
 		if($(this).data("next") == true) {
 			if(documentExists("vid/video" + (vid+1) + ".mp4")) {
