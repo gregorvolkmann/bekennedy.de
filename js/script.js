@@ -1,28 +1,17 @@
 /*
  *	TODO
  *
- *	video7 is 720p
- *
- *	seamless video transition
  *	on page loaded auto resizing
- *	nav click -> quiz modal still visible
- *	quiz 3 wasser next not weiter
- *	quiz 8 nach antwort1 kein video?
- *	auf dem hotelzimmer alle antworten führen weiter
  *	
  *	overlay management
  *	
  *	BUGS
  *	
  *	videoframe close -> nav hidden
- *	video to video transition
  *	
  *	SONSTIGES
- *	# body bg coins
- *	# bodyhöhe anpassen
- *	# nav progressbg seamless
- *	social links
- *	# nav element clicked border
+ *	social mail forward
+ *	video7 480p but twice the filesize
  *	
  *	DELETED FEATURES
  *	video start card flip
@@ -43,7 +32,7 @@ var progressbarWidth;
 function pauseVideo($f) {
 	if(!$f.get(0).paused) {
 		$f.get(0).pause();
-	}
+	}	
 }
 
 function toggleMute() {
@@ -108,8 +97,14 @@ function showQuiz(vid) {
 	$.get("quiz/answers" + vid + ".html", function(data){
 		$("#quiz-modal #answerButton").before(data);
 		
-		$("input[name=answer]:radio").change(function() {
+		$("input[name='answer']:radio").change(function() {
 			$("#answerframe").attr("src", "vid/video" + vid + "/answer" + $(this).val() + ".mp4");
+			if(typeof $("#quiz-modal input[name='answer']:radio:checked").data("next") !== 'undefined') {
+				$("#answerframe").data("next", true);
+			} else {
+				$("#answerframe").removeData("next");
+			}
+			
 			$("#answerframe")[0].load();
 		});
 	});
@@ -118,8 +113,7 @@ function showQuiz(vid) {
 }
 
 function submitAnswer() {
-	if($("input[name=answer]:radio:checked").val()) {
-		$("#answerframe").data("next", $("#quiz-modal input[name=answer]:radio:checked").data("next"));
+	if($("input[name='answer']:radio:checked").val()) {
 		$("#answerframe").data("vid", $("#quiz-modal").data("vid"));
 		showFrame($("#answerframe"), function() {
 			hideFrame($("#videoframe"));
@@ -323,6 +317,7 @@ $(document).ready(function() {
 	
 	$("#answerframe").on("ended", function() {
 		var vid = Number($(this).data("vid"));
+
 		if($(this).data("next") == true) {
 			if(documentExists("vid/video" + (vid+1) + ".mp4")) {
 				// next video
@@ -334,7 +329,8 @@ $(document).ready(function() {
 				}
 			} else {
 				// finish
-				closeFrame($("#videoframe, #answerframe"));
+				closeFrame($("#answerframe"));
+				closeFrame($("#videoframe"));
 				$("#info-modal").modal('show');
 			}
 		} else {
@@ -342,7 +338,7 @@ $(document).ready(function() {
 			showFrame($("#videoframe"), function() {
 				hideFrame($("#answerframe"));
 			});
-			$("input[name=answer]:radio").removeAttr("checked");
+			$("input[name='answer']:radio").removeAttr("checked");
 			showQuiz(vid);
 		}
 	});
