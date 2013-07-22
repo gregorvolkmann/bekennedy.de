@@ -243,9 +243,9 @@ $(document).ready(function() {
 			$(this).data("switcher", "#quiz-modal");
 			$("#quiz-modal").hide();
 		} else {
+			$("#content > *").fadeOut();
 			pauseVideo($("#videoframe"));
 			pauseVideo($("#answerframe"));
-			$("#content > *").fadeOut();
 			deactivateNavHovering();
 		}
 		activateNav(10);
