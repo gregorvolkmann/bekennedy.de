@@ -20,9 +20,9 @@
 			<div id="postcardwrap">
 				<a href="#video0" title="Be Kennedy">
 					<img id="postcard" src="img/postcard.png" />
-					<div id="playButton">
-							<img src="ico/play.png" />
-					</div>
+					<span id="playButton">
+						&nbsp;&#9658;
+					</span>
 				</a>
 				<img id="envelope" src="img/envelope.jpg" />
 				<img id="bueroklammer3" src="img/bueroklammer3.png" />
@@ -77,14 +77,6 @@
 					<span class="text">19:45</span>
 				</a>
 			</li>
-			<!-- <li>
-				<a href="#video7" title="Vor dem Hotel">
-					<span class="dot"></span>
-					<span class="nav-progressbg"></span>
-					<span class="nav-progress"></span>
-					<span class="text">20:20</span>
-				</a>
-			</li> -->
 			<li>
 				<a href="#video7" title="Auf dem Hotelzimmer">
 					<span class="dot"></span>
@@ -122,11 +114,13 @@
 		<div id="videocurtain"></div>
 		<button id="video-closebutton" type="button" class="close closeButton frameCloseButton" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="videoframe">
-			<source id="storyvideo" src="vid/video1.mp4" type="video/mp4">
+			<source class="mp4" src="vid/video1.mp4" type="video/mp4">
+			<source class="ogg" src="vid/video1.mp4" type="video/ogg">
 		</video>
 		<button id="answer-closebutton" type="button" class="close closeButton frameCloseButton" aria-hidden="true" onclick="closeFrame($(this).next()); resetNav()">×</button>
 		<video id="answerframe">
-			<source id="answervideo" type="video/mp4">
+			<source class="mp4" type="video/mp4">
+			<source class="ogg" type="video/ogg">
 		</video>
 		<div id="quiz-modal" class="modal hide fade" data-backdrop="false">
 			<div class="modal-header">
@@ -164,10 +158,10 @@
 		</div>
 
 		<div id="social-buttons" >
-			<a href="https://www.facebook.com/pages/WE-LIKE-STADTMUSEUM-WIESBADEN/265410883480887?fref=ts" target="_blank"><img src="img/facebook.png" alt="facebook"/> </a>
-			<a href="https://www.twitter.com/BeKennedyDe" target="_blank"><img src="img/twitter.png" alt="twitter"/> </a>
+			<a href="https://www.facebook.com/pages/WE-LIKE-STADTMUSEUM-WIESBADEN/265410883480887?fref=ts" target="_blank"><img src="ico/facebook.png" alt="facebook"/> </a>
+			<a href="https://www.twitter.com/BeKennedyDe" target="_blank"><img src="ico/twitter.png" alt="twitter"/> </a>
 			<a href="mailto:stadtmuseum@wiesbaden.de">
-			<img src="img/mail.png" alt="mail"/> </a>
+			<img src="ico/mail.png" alt="mail"/> </a>
 
 		</div>
 		<script src="http://code.jquery.com/jquery.js"></script>

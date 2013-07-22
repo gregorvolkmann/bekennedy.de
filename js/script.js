@@ -43,7 +43,8 @@ function toggleMute() {
 
 function playVideo(v, $f) {
 	// load video
-	$f.attr("src", "vid/video" + v + ".mp4");
+	$f.children(".mp4").attr("src", "vid/video" + v + ".mp4");
+	$f.children(".ogg").attr("src", "vid/video" + v + ".ogv");
 	$f.data("vid", v);
 	$f[0].load();
 
@@ -83,7 +84,7 @@ function showFrame($f, cb) {
 			if(typeof cb !== 'undefined') {
 				cb();
 			}
-		});
+		}).css("display", "block");
 		$f.prev().fadeIn(1000);
 		$("#videocurtain").fadeIn(2000);
 	}
@@ -97,7 +98,8 @@ function showQuiz(vid) {
 		$("#quiz-modal #answerButton").before(data);
 		
 		$("input[name='answer']:radio").change(function() {
-			$("#answerframe").attr("src", "vid/video" + vid + "/answer" + $(this).val() + ".mp4");
+			$("#answerframe").children(".mp4").attr("src", "vid/video" + vid + "/answer" + $(this).val() + ".mp4");
+			$("#answerframe").children(".ogg").attr("src", "vid/video" + vid + "/answer" + $(this).val() + ".ogv");
 			if(typeof $("#quiz-modal input[name='answer']:radio:checked").data("next") !== 'undefined') {
 				$("#answerframe").data("next", true);
 			} else {
@@ -296,7 +298,7 @@ $(document).ready(function() {
     }
 	
 	$("#videoframe").on("ended", function() {
-		var vid = Number($("#videoframe").attr("src").substring(9, 10));
+		var vid = Number($("#videoframe").data("vid"));
 		
 		if(documentExists("quiz/question" + vid + ".html")) {
 	        // question exists
@@ -315,7 +317,7 @@ $(document).ready(function() {
 	});
 	
 	$("#answerframe").on("ended", function() {
-		var vid = $("#videoframe").data("vid");
+		var vid = Number($("#videoframe").data("vid"));
 
 		if($(this).data("next") == true) {
 			if(documentExists("vid/video" + (vid+1) + ".mp4")) {
