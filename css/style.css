@@ -27,7 +27,7 @@ a, a:hover, a:active, a:focus {
 }
 
 #content {
-	background: #000 url(../img/bg.jpg) no-repeat scroll top center;
+	background: transparent url(../img/bg.jpg) no-repeat scroll top center;
 	color: rgb(250, 245, 220);
 	margin: 0 auto;
 	min-height: 570px;
@@ -49,77 +49,71 @@ a, a:hover, a:active, a:focus {
 	padding: 2% 10px 10px;
 	font-size: 100%;
 	font-weight: 300;
-	font-family: AkzidenzGrotesk, sans-serif;
+/*	font-family: AkzidenzGrotesk, sans-serif;*/
 	opacity: 0.5;
 	-moz-opacity: 0.5;
-	filter:alpha(opacity=50);
+	filter: alpha(opacity=50);
 	width: 250px;
 }
 
 #headline {
 	font: normal normal bold 110px AkzidenzGroteskBold, sans-serif;
-	margin: 0px;
-	margin-top: 3%;
+	margin: 3% 0 0;
 	text-shadow: #000 7px 7px 7px;
 	text-shadow: rgba(0, 0, 0, 0.3) 7px 7px 7px;
 	letter-spacing: 2px;
 }
 
 #subline {
-	margin: -10px auto;
-	width: 490px;
+	margin: -10px auto 0;
+/*	width: 490px;*/
 	margin-left: 24%;
 }
 
-#muenze {
-
-	-moz-transform: rotate(20deg);
-	-ms-transform: rotate(20deg);
-	-o-transform: rotate(8deg);
-	-webkit-transform: rotate(-14deg);
+#mark {
 	left: 230px;
 	position: absolute;
-	transform: rotate(20deg);
+	transform: rotate(-14deg);
 	top: 230px;
-}
-
-#muenze2 {
-
-	-moz-transform: rotate(20deg);
-	-ms-transform: rotate(20deg);
-	-o-transform: rotate(8deg);
+	-moz-transform: rotate(-14deg);
+	-ms-transform: rotate(-14deg);
+	-o-transform: rotate(-14deg);
 	-webkit-transform: rotate(-14deg);
+}
+#pfennig {
 	left: 200px;
 	position: absolute;
-	transform: rotate(20deg);
+	transform: rotate(-14deg);
 	top: 370px;
+	-moz-transform: rotate(-14deg);
+	-ms-transform: rotate(-14deg);
+	-o-transform: rotate(-14deg);
+	-webkit-transform: rotate(-14deg);
 }
-
 #bueroklammer3 {
-
-	-moz-transform: rotate(20deg);
-	-ms-transform: rotate(20deg);
-	-o-transform: rotate(8deg);
-	-webkit-transform: rotate(7deg);
-	left: 435px;
 	position: absolute;
-	transform: rotate(-40deg);
+	right: -20px;
+	transform: rotate(7deg);
 	top: 0px;
+	-moz-transform: rotate(7deg);
+	-ms-transform: rotate(7deg);
+	-o-transform: rotate(7deg);
+	-webkit-transform: rotate(7deg);
 }
 
 #postcardwrap {
 	margin: 0px auto;
-	margin-top: 1.5%;
 	position: relative;
 	width: 440px;
 	z-index: 0;
 }
 	#postcardwrap a {
+		display: block;
 		height: 100%;
 		width: 100%;
 	}
 	#postcard {
-		width: 100%;
+/*		width: 100%;*/
 	}
 	#playButton {
 		background-color: rgb(255,255,255);
@@ -154,16 +148,19 @@ a, a:hover, a:active, a:focus {
 			width: 40px;
 		}
 	#envelope {
-		background-color: #FDA;
+		background-color: #EDE6C4;
 		bottom: 10px;
 		height: 230px;
 		right: -50px;
-		margin: 0px auto;
+/*		margin: 0px auto;*/
 		position: absolute;
+		transform: rotate(-9deg);
 		width: 400px;
 		z-index: -1;
-		-webkit-transform: rotate(-9deg);
 		-moz-transform: rotate(-9deg);
+		-ms-transform: rotate(-9deg);
+		-o-transform: rotate(-9deg);
+		-webkit-transform: rotate(-9deg);
 	}
 
 
@@ -174,13 +171,11 @@ a, a:hover, a:active, a:focus {
 	font-weight: normal;
 /*	line-height: 30px;*/
 	opacity: .5;
-	-moz-opacity: .5;
-	filter:alpha(opacity=0.5);
+	filter: alpha(opacity=0.5);
 }
 	.closeButton:hover {
 		opacity: 1;
-		-moz-opacity: 1;
-		filter:alpha(opacity=1);
+		filter: alpha(opacity=1);
 	}
 .frameCloseButton {
 	color: rgb(250, 245, 220);
@@ -219,19 +214,19 @@ a, a:hover, a:active, a:focus {
 
 /******		Navigation		******/
 
-#navwrap {
+/*#navwrap {
 	bottom: 0px;
 	position: fixed;
 	width: 100%;
 	z-index: 10;
 	height: 65px;
 
-}
+}*/
 	#nav {
 		background-color: rgb(250, 245, 220);
 		bottom: 0px;
 		margin: 0;
-		padding: 0;
+/*		padding: 0;*/
 		position: fixed;
 		width: 100%;
 		z-index: 10;
@@ -400,7 +395,17 @@ a, a:hover, a:active, a:focus {
 		#info-content {
 			overflow: hidden;
 		}
-
+			#info-content p, #info-content address {
+				font: 13px AkzidenzGroteskRegular, sans-serif;
+				margin-bottom: 13px;
+			}
+			#info-content a {
+				color: black;
+			}
+			#info-content h4 {
+				font: 16px AkzidenzGroteskBold, sans-serif;
+				margin: 0 0 6px;
+			}
 
 /******		Quiz Modal		******/
 #quiz-modal {
@@ -439,14 +444,27 @@ a, a:hover, a:active, a:focus {
 		}
 	
 #social-buttons {
-	position:fixed;
-	right: 45px;
+	position: fixed;
+	right: 43px;
 	top: 20px;
-	width: 70px;
 }
 	#social-buttons a {
+		display: block;
+		float: left;
+		height: 20px;
+		margin: 0 2px;
 		opacity: 0.5;
+		width: 20px;
 	}
-	#social-buttons a:hover {
-		opacity: 1;
+		#social-buttons a:hover {
+			opacity: 1;
+		}
+	#social-facebook {
+		background: transparent url(../ico/social-buttons.png) no-repeat scroll 0 0;
+	}
+	#social-twitter {
+		background: transparent url(../ico/social-buttons.png) no-repeat scroll -20px 0;
+	}
+	#social-mail {
+		background: transparent url(../ico/social-buttons.png) no-repeat scroll -40px 0;
 	}

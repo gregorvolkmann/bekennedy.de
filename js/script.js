@@ -1,25 +1,18 @@
 /*
  *	TODO
  *
- *	on page loaded auto resizing
- *	
- *	overlay management
- *	
- *	BUGS
- *	
- *	videoframe close -> nav hidden
- *	
- *	SONSTIGES
- *	social mail forward
+ *	check content rights
+ *	nav hover:before transition
  *	video7 480p but twice the filesize
+ *	SEO Links
+ *	Sitemap
+ *	Robots.txt
+ *	
+ *	
  *	
  *	DELETED FEATURES
  *	video start card flip
  *	ambiente audio
- *	
- *	
- *	
- *	
  */ 
 
 var w = 4;
